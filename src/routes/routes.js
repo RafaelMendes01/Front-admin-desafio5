@@ -11,11 +11,17 @@ import Icons from 'src/pages/Icons.vue'
 import Maps from 'src/pages/Maps.vue'
 import Notifications from 'src/pages/Notifications.vue'
 import Upgrade from 'src/pages/Upgrade.vue'
+import Login from 'src/pages/Login/login.vue'
 
 const routes = [
   {
     path: '/',
     component: DashboardLayout,
+    redirect: '/admin/overview'
+  },
+  {
+    path: '/login',
+    component: Login,
     redirect: '/admin/overview'
   },
   {
