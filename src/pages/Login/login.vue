@@ -2,10 +2,9 @@
     <div class="container">
         <div class="change-form">
             <h3>Bem vindo</h3>
-            <p>preencha os dados para realizar login na nossa aplicação</p>
         </div>
         <div class="form">
-            <form @submit.prevent="">
+            <form @submit.prevent="submit">
                  <h3>Login</h3>
                   <base-input type="text"
                     placeholder="Nome"
@@ -13,7 +12,7 @@
                     :addonLeftIcon="'nc-icon nc-single-02'"
                     >
                   </base-input>
-                   <base-input type="text"
+                   <base-input type="email"
                     placeholder="Email"
                     v-model="user.email"
                     :addonLeftIcon="'nc-icon nc-email-83'"
@@ -25,7 +24,7 @@
                     :addonLeftIcon="'nc-icon nc-lock-circle-open'"
                     >
                   </base-input>
-                 <button class="btn btn-primary btn-fill">Logar</button>
+                 <button class="btn btn-primary btn-fill" type="submit">Logar</button>
             </form>
         </div>
     </div>
@@ -41,6 +40,11 @@ export default{
             }
         }
     },
+    methods: {
+       async submit () {
+        this.$store.dispatch('Login', this.user)
+        }
+    }
 }
 </script>
 
