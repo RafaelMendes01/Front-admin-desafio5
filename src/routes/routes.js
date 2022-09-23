@@ -3,6 +3,7 @@ import DashboardLayout from '../layout/DashboardLayout.vue'
 import NotFound from '../pages/NotFoundPage.vue'
 
 // Admin pages
+import DashBoard from 'src/pages/Dashboard/Dashboard.vue'
 import Overview from 'src/pages/Overview.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
@@ -12,65 +13,68 @@ import Maps from 'src/pages/Maps.vue'
 import Notifications from 'src/pages/Notifications.vue'
 import Upgrade from 'src/pages/Upgrade.vue'
 import Login from 'src/pages/Login/login.vue'
+import Movies from 'src/pages/Movies/Movies.vue'
 
 const routes = [
   {
     path: '/',
-    component: DashboardLayout,
-    redirect: '/admin/overview'
-  },
-  {
-    path: '/login',
     component: Login,
-    redirect: '/admin/overview'
   },
   {
-    path: '/admin',
-    component: DashboardLayout,
-    redirect: '/admin/overview',
-    children: [
-      {
-        path: 'overview',
-        name: 'Overview',
-        component: Overview
-      },
-      {
-        path: 'user',
-        name: 'User',
-        component: UserProfile
-      },
-      {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
-      },
-      {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
-      },
-      {
-        path: 'upgrade',
-        name: 'Upgrade to PRO',
-        component: Upgrade
-      }
-    ]
+    path: '/dashboard',
+    component: DashBoard,
   },
+      {
+        path: '/admin',
+        component: DashboardLayout,
+        children: [
+          {
+            path: 'Movies',
+            name: 'Movies',
+            component: Movies
+          },
+          {
+            path: 'overview',
+            name: 'Overview',
+            component: Overview
+          },
+          {
+            path: 'user',
+            name: 'User',
+            component: UserProfile
+          },
+          {
+            path: 'table-list',
+            name: 'Table List',
+            component: TableList
+          },
+          {
+            path: 'typography',
+            name: 'Typography',
+            component: Typography
+          },
+          {
+            path: 'icons',
+            name: 'Icons',
+            component: Icons
+          },
+          {
+            path: 'maps',
+            name: 'Maps',
+            component: Maps
+          },
+          {
+            path: 'notifications',
+            name: 'Notifications',
+            component: Notifications
+          },
+          {
+            path: 'upgrade',
+            name: 'Upgrade to PRO',
+            component: Upgrade
+          }
+        ]
+      },
   { path: '*', component: NotFound }
 ]
 

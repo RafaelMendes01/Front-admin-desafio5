@@ -13,10 +13,18 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
+import Dialog from 'primevue/dialog';
+import Button from 'primevue/button';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
 import  Store  from './store/index'
+import PrimeVue from 'primevue/config';
+import 'primevue/resources/themes/saga-blue/theme.css'
+import 'primevue/resources/primevue.min.css'
+import 'primeicons/primeicons.css'
 
 // LightBootstrap plugin
 import LightBootstrap from './light-bootstrap-main'
@@ -28,11 +36,16 @@ import './registerServiceWorker'
 // plugin setup
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
+Vue.use(PrimeVue)
+Vue.component('VDataTable', DataTable)
+Vue.component('VColumn', Column)
+Vue.component('VButton', Button)
+Vue.component('VDialog', Dialog)
 
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
-  linkActiveClass: 'nav-item active',
+importActiveClass: 'nav-item active',
   scrollBehavior: (to) => {
     if (to.hash) {
       return {selector: to.hash}
