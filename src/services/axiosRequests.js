@@ -7,5 +7,11 @@ export default {
     },
     getUsers: () => {
         return http.get('users')
+    },
+    getMovies: (token) => {
+        return http.get('movies',token)
+    },
+    DeleteMovies: (token, id) => {
+        return http.delete(`movies/${id}`,token)
     }
 }
