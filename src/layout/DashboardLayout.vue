@@ -6,11 +6,11 @@
         <i class="nc-icon nc-button-play"></i>
         <p>Filmes</p>
       </sidebar-link>
-      <sidebar-link to="/admin/user">
+      <sidebar-link to="/admin/Theaters">
         <i class="nc-icon nc-square-pin"></i>
         <p>Teatros</p>
       </sidebar-link>
-      <sidebar-link to="/admin/table-list">
+      <sidebar-link to="/admin/Users">
         <i class="nc-icon nc-single-02"></i>
         <p>Usuarios</p>
       </sidebar-link>
