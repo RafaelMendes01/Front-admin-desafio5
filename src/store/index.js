@@ -10,7 +10,8 @@ export default new vuex.Store({
         UserEmail: '',
         jwtToken: '',
         Movies: [],
-        Theaters: []
+        Theaters: [],
+        Users: [],
     },
     mutations: {
         'Login'(state, userData) {
@@ -23,6 +24,10 @@ export default new vuex.Store({
         },
         'GET_THEATERS'(state, Theaters) {
             state.Theaters = Theaters
+        },
+        'GET_USERS'(state, Users){
+            state.Users = Users
+
         }
     },
     actions: {
@@ -59,13 +64,12 @@ export default new vuex.Store({
         async updateMovies({ commit }, data) {
             await Requests.UpdateMovies({ headers: { Authorization: data.jwt } }, data.id, data.Movies)
                 .then(res => {
-                    console.log(res)
                 })
         },
         async getUsers({ commit }, token) {
             await Requests.getUsers({ headers: { Authorization: token } })
                 .then(res => {
-                    commit('GET_MOVIES', res.data)
+                    commit('GET_USERS', res.data)
                 })
         },
         async deleteUsers({ commit }, data) {
@@ -76,11 +80,10 @@ export default new vuex.Store({
         async createUsers({ commit }, data) {
             await Requests.CreateUsers(data)
                 .then(res => {
-
                 })
         },
         async updateUsers({ commit }, data) {
-            await Requests.UpdateUsers({ headers: { Authorization: data.jwt } }, data.id, data.user)
+            await Requests.UpdateUsers({ headers: { Authorization: data.jwt } }, data.id, data.Users)
                 .then(res => {
                 })
         },
@@ -104,7 +107,6 @@ export default new vuex.Store({
         async updateTheaters({ commit }, data) {
             await Requests.UpdateTheaters({ headers: { Authorization: data.jwt } }, data.id, data.Theaters)
                 .then(res => {
-                    console.log(res)
                 })
         }
 
