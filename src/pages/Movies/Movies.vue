@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <VDialog header="Deletar Usuario" :visible.sync="display">
+    <VDialog header="Deletar Filme" :visible.sync="display">
       <h6>inserir id</h6>
       <input type="text" v-model="id" />
       <template #footer>
@@ -18,7 +18,7 @@
         />
       </template>
     </VDialog>
-    <VDialog header="Criar Usuario" :visible.sync="displayC">
+    <VDialog header="Criar Filme" :visible.sync="displayC">
       <h6>Awards</h6>
       <input type="text" v-model="Movies.awards" />
       <h6>Countries</h6>
@@ -72,7 +72,7 @@
         />
       </template>
     </VDialog>
-    <VDialog header="Atualizar Usuario" :visible.sync="displayU">
+    <VDialog header="Atualizar Filme" :visible.sync="displayU">
       <h6>inserir id</h6>
       <input type="text" v-model="id" />
        <h6>Awards</h6>
