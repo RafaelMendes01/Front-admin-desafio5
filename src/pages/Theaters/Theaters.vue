@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <VDialog header="Deletar Usuario" :visible.sync="display">
+    <VDialog header="Deletar Filme" :visible.sync="display">
       <h6>inserir id</h6>
       <input type="text" v-model="id" />
       <template #footer>
@@ -14,49 +14,31 @@
           label="Deletar"
           icon="pi pi-check"
           autofocus
-          @click="deleteMovie"
+          @click="deleteTheater"
         />
       </template>
     </VDialog>
-    <VDialog header="Criar Usuario" :visible.sync="displayC">
-      <h6>Awards</h6>
-      <input type="text" v-model="Movies.awards" />
-      <h6>Countries</h6>
-      <input type="text" v-model="Movies.countries" />
-      <h6>Directors</h6>
-      <input type="text" v-model="Movies.directors" />
-      <h6>Fullplot</h6>
-      <input type="text" v-model="Movies.fullPlot" />
-      <h6>Genres</h6>
-      <input type="text" v-model="Movies.genres" />
-      <h6>IMDB</h6>
-      <input type="text" v-model="Movies.imdb" />
-      <h6>Languages</h6>
-      <input type="text" v-model="Movies.languages" />
-      <h6>Metacritic</h6>
-      <input type="text" v-model="Movies.metacritic" />
-      <h6>Plot</h6>
-      <input type="text" v-model="Movies.plot" />
-      <h6>Poster</h6>
-      <input type="text" v-model="Movies.poster" />
-      <h6>Rated</h6>
-      <input type="text" v-model="Movies.rated" />
-      <h6>Released</h6>
-      <input type="text" v-model="Movies.released" />
-      <h6>Runtime</h6>
-      <input type="text" v-model="Movies.runtime" />
-      <h6>Title</h6>
-      <input type="text" v-model="Movies.title" />
-      <h6>Tomatoes</h6>
-      <input type="text" v-model="Movies.tomatoes" />
+    <VDialog header="Criar Filme" :visible.sync="displayC">
+      <h6>TheaterId</h6>
+      <input type="text" v-model="Theaters.theaterId" />
+      <h5>Location:</h5>
+      <h6>Street1</h6>
+      <input type="text" v-model="Theaters.location.address.street1" />
+      <h6>Street2</h6>
+      <input type="text" v-model="Theaters.location.address.street2" />
+      <h6>Zipcode</h6>
+      <input type="text" v-model="Theaters.location.address.zipcode" />
+      <h6>State</h6>
+      <input type="text" v-model="Theaters.location.address.state" />
+      <h6>City</h6>
+      <input type="text" v-model="Theaters.location.address.city" />
+      <h5>Geo:</h5>
       <h6>Type</h6>
-      <input type="text" v-model="Movies.type" />
-      <h6>Writers</h6>
-      <input type="text" v-model="Movies.writers" />
-      <h6>Year</h6>
-      <input type="number" v-model="Movies.year" />
-       <h6>LastUpdated</h6>
-      <input type="string" v-model="Movies.lastupdated" />
+      <input type="text" v-model="Theaters.location.geo.type" />
+      <h6>Latitude</h6>
+      <input type="text" v-model="Theaters.location.geo.coordinates[0]" />
+      <h6>Longitude</h6>
+      <input type="text" v-model="Theaters.location.geo.coordinates[1]" />
       <template #footer>
         <VButton
           label="Cancelar"
@@ -68,51 +50,33 @@
           label="Criar"
           icon="pi pi-check"
           autofocus
-          @click="createMovie"
+          @click="createTheater"
         />
       </template>
     </VDialog>
-    <VDialog header="Atualizar Usuario" :visible.sync="displayU">
+    <VDialog header="Atualizar Filme" :visible.sync="displayU">
       <h6>inserir id</h6>
       <input type="text" v-model="id" />
-       <h6>Awards</h6>
-      <input type="text" v-model="Movies.awards" />
-      <h6>Countries</h6>
-      <input type="text" v-model="Movies.countries" />
-      <h6>Directors</h6>
-      <input type="text" v-model="Movies.directors" />
-      <h6>Fullplot</h6>
-      <input type="text" v-model="Movies.fullPlot" />
-      <h6>Genres</h6>
-      <input type="text" v-model="Movies.genres" />
-      <h6>IMDB</h6>
-      <input type="text" v-model="Movies.imdb" />
-      <h6>Languages</h6>
-      <input type="text" v-model="Movies.languages" />
-      <h6>Metacritic</h6>
-      <input type="text" v-model="Movies.metacritic" />
-      <h6>Plot</h6>
-      <input type="text" v-model="Movies.plot" />
-      <h6>Poster</h6>
-      <input type="text" v-model="Movies.poster" />
-      <h6>Rated</h6>
-      <input type="text" v-model="Movies.rated" />
-      <h6>Released</h6>
-      <input type="text" v-model="Movies.released" />
-      <h6>Runtime</h6>
-      <input type="text" v-model="Movies.runtime" />
-      <h6>Title</h6>
-      <input type="text" v-model="Movies.title" />
-      <h6>Tomatoes</h6>
-      <input type="text" v-model="Movies.tomatoes" />
+      <h6>TheaterId</h6>
+      <input type="text" v-model="Theaters.location.address.theaterId" />
+      <h5>Location:</h5>
+      <h6>Street1</h6>
+      <input type="text" v-model="Theaters.location.address.street1" />
+      <h6>Street2</h6>
+      <input type="text" v-model="Theaters.location.address.street2" />
+      <h6>Zipcode</h6>
+      <input type="text" v-model="Theaters.location.address.zipcode" />
+      <h6>State</h6>
+      <input type="text" v-model="Theaters.location.address.state" />
+      <h6>City</h6>
+      <input type="text" v-model="Theaters.location.address.city" />
+      <h5>Geo:</h5>
       <h6>Type</h6>
-      <input type="text" v-model="Movies.type" />
-      <h6>Writers</h6>
-      <input type="text" v-model="Movies.writers" />
-      <h6>Year</h6>
-      <input type="number" v-model="Movies.year" />
-       <h6>LastUpdated</h6>
-      <input type="string" v-model="Movies.lastupdated" />
+      <input type="text" v-model="Theaters.location.geo.type" />
+      <h6>Latitude</h6>
+      <input type="text" v-model="Theaters.location.geo.coordinates[0]" />
+      <h6>Longitude</h6>
+      <input type="text" v-model="Theaters.location.geo.coordinates[1]" />
       <template #footer>
         <VButton
           label="Cancelar"
@@ -124,7 +88,7 @@
           label="Atualizar"
           icon="pi pi-check"
           autofocus
-          @click="updateMovie"
+          @click="updateTheater"
         />
       </template>
     </VDialog>
@@ -157,15 +121,16 @@
       </template>
     </div>
     <VDataTable
-      :value="this.$store.state.Movies"
+      :value="this.$store.state.Theaters"
       :paginator="true"
       :rows="10"
       stripedRows
     >
       <VColumn field="_id" header="ID"></VColumn>
-      <VColumn field="title" header="Title"></VColumn>
-      <VColumn field="type" header="Type"></VColumn>
-      <VColumn field="year" header="Year"></VColumn>
+      <VColumn field="theaterId" header="Theater-id"></VColumn>
+      <VColumn field="location.address.street1" header="Street"></VColumn>
+      <VColumn field="location.address.city" header="City"></VColumn>
+      <VColumn field="location.geo.coordinates" header="Coordinates"></VColumn>
     </VDataTable>
   </div>
 </template>
@@ -173,7 +138,10 @@
 export default {
   methods: {
     showData() {
-      this.$store.dispatch("getMovies", `Bearer ${this.$store.state.jwtToken}`);
+      this.$store.dispatch(
+        "getTheaters",
+        `Bearer ${this.$store.state.jwtToken}`
+      );
     },
     showDeleteDialog() {
       this.display = true;
@@ -193,28 +161,33 @@ export default {
     hiddenUpdateDialog() {
       this.displayU = false;
     },
-    deleteMovie() {
+    deleteTheater() {
       const data = {
         id: this.id,
         jwt: `Bearer ${this.$store.state.jwtToken}`,
       };
-      this.$store.dispatch("deleteMovies", data);
+      this.$store.dispatch("deleteTheaters", data);
     },
-    createMovie() {
+    createTheater() {
+      this.Theaters.location.geo.coordinates[0] = parseFloat(this.Theaters.location.geo.coordinates[0]);
+      this.Theaters.location.geo.coordinates[1] = parseFloat(this.Theaters.location.geo.coordinates[1]);
       const data = {
-        Movies: this.Movies,
+        Theaters: this.Theaters,
         jwt: `Bearer ${this.$store.state.jwtToken}`,
       };
-      this.$store.dispatch("createMovies", data);
+      this.$store.dispatch("createTheaters", data);
     },
-    updateMovie() {
+    updateTheater() {
+      this.Theaters.location.geo.coordinates[0] = parseFloat(this.Theaters.location.geo.coordinates[0]);
+      this.Theaters.location.geo.coordinates[1] = parseFloat(this.Theaters.location.geo.coordinates[1]);
       const data = {
-        Movies: this.Movies,
+        Theaters: this.Theaters,
         jwt: `Bearer ${this.$store.state.jwtToken}`,
-        id: this.id
+        id: this.id,
       };
-       this.$store.dispatch("updateMovies", data);
-    }
+      console.log(data)
+      this.$store.dispatch("updateTheaters", data);
+    },
   },
   data() {
     return {
@@ -222,26 +195,21 @@ export default {
       displayC: false,
       displayU: false,
       id: "",
-      Movies: {
-        awards: "",
-        countries: "",
-        directors: "",
-        fullolot: "",
-        genres: "",
-        imdb: "",
-        Languages: "",
-        metacritic: "",
-        plot: "",
-        poster: "",
-        rated: "",
-        released: "",
-        runtime: "",
-        title: "",
-        tomatoes: "",
-        type: "",
-        writers: "",
-        year: "",
-        lastupdated: ""
+      Theaters: {
+        theaterId: "",
+        location: {
+          address: {
+            street1: "",
+            street2: "",
+            city: "",
+            state: "",
+            zipcode: "",
+          },
+          geo: {
+            type: "",
+            coordinates: [],
+          },
+        },
       },
     };
   },
