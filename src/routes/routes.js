@@ -14,6 +14,8 @@ import Notifications from 'src/pages/Notifications.vue'
 import Upgrade from 'src/pages/Upgrade.vue'
 import Login from 'src/pages/Login/login.vue'
 import Movies from 'src/pages/Movies/Movies.vue'
+import Users from 'src/pages/Users/Users.vue'
+import Theaters from 'src/pages/Theaters/Theaters.vue'
 
 const routes = [
   {
@@ -32,6 +34,16 @@ const routes = [
             path: 'Movies',
             name: 'Movies',
             component: Movies
+          },
+					{
+            path: 'Users',
+            name: 'Users',
+            component: Users
+          },
+					{
+            path: 'Theaters',
+            name: 'Theaters',
+            component: Theaters
           },
           {
             path: 'overview',
