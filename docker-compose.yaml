@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    container_name: admin-front
+    tty: true
+    networks: 
+      - tallosflix
+    entrypoint: sh ./.docker/entrypoint.sh
+    volumes: 
+      - ./:/usr/front-end-sistema-gerenciador-de-funcionarios/app
+    ports:
+      - 8080:8080
+
+networks:
+  tallosflix:
+   driver: bridge

@@ -1,0 +1,47 @@
+@import './_variables.scss';
+.container{
+    overflow-y: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    .change-form{
+        background-color: $primary-bg;
+        width: 40%;
+        height: 92%;
+        border-radius: 25px 0px 0px 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        h3{
+            color: $white-bg;
+        }
+        p{
+            color: $white-bg;
+        }
+    }
+    .form {
+        background-color: $white-bg;
+        width: 60%;
+        height: 92%;
+        border-radius: 0px 25px 25px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        form{
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            h3{
+                align-self: center;
+                color: $primary-bg;
+                margin-bottom: 2rem !important;
+            }
+            button{
+                width: 30%;
+                align-self: center;
+                border-radius: 25px;
+            }
+        }
+    }
+}
