@@ -16,6 +16,7 @@ import Login from 'src/pages/Login/login.vue'
 import Movies from 'src/pages/Movies/Movies.vue'
 import Users from 'src/pages/Users/Users.vue'
 import Theaters from 'src/pages/Theaters/Theaters.vue'
+import Report from 'src/pages/Report/Report.vue'
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
             path: 'Theaters',
             name: 'Theaters',
             component: Theaters
+          },
+          {
+            path: 'Report',
+            name: 'Report',
+            component: Report
           },
           {
             path: 'overview',
