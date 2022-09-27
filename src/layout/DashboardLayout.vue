@@ -14,7 +14,7 @@
         <i class="nc-icon nc-single-02"></i>
         <p>Usuarios</p>
       </sidebar-link>
-      <sidebar-link to="/admin/typography">
+      <sidebar-link to="/admin/Report">
         <i class="nc-icon nc-notes"></i>
         <p>Formularios</p>
       </sidebar-link>

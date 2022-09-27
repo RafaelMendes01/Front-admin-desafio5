@@ -41,4 +41,10 @@ export default {
     UpdateTheaters: (token, id, data) => {
         return http.patch(`theaters/${id}`, data, token)
     },
+    getComments: (token) => {
+        return http.get('comments', token)
+    },
+    getSessions: (token) => {
+        return http.get('sessions', token)
+    },
 }

@@ -12,6 +12,8 @@ export default new vuex.Store({
         Movies: [],
         Theaters: [],
         Users: [],
+        Comments: [],
+        Sessions: [],
     },
     mutations: {
         'Login'(state, userData) {
@@ -25,9 +27,14 @@ export default new vuex.Store({
         'GET_THEATERS'(state, Theaters) {
             state.Theaters = Theaters
         },
-        'GET_USERS'(state, Users){
+        'GET_USERS'(state, Users) {
             state.Users = Users
-
+        },
+        'GET_COMMENTS'(state, Comments) {
+            state.Comments = Comments
+        },
+        'GET_SESSIONS'(state, Sessions) {
+            state.Sessions = Sessions
         }
     },
     actions: {
@@ -107,6 +114,18 @@ export default new vuex.Store({
         async updateTheaters({ commit }, data) {
             await Requests.UpdateTheaters({ headers: { Authorization: data.jwt } }, data.id, data.Theaters)
                 .then(res => {
+                })
+        },
+        async getComments({ commit }, token) {
+            await Requests.getComments({ headers: { Authorization: token } })
+                .then(res => {
+                    commit('GET_COMMENTS', res.data)
+                })
+        },
+        async getSessions({ commit }, token) {
+            await Requests.getSessions({ headers: { Authorization: token } })
+                .then(res => {
+                    commit('GET_SESSIONS', res.data)
                 })
         }
 
