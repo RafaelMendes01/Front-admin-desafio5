@@ -46,7 +46,7 @@ export default new vuex.Store({
                         data
                     };
                     commit('Login', userData);
-                    window.location.replace('/#/dashboard')
+                    window.location.replace('/#/admin/Movies')
                 })
                 .catch(error => console.log(error))
         },
