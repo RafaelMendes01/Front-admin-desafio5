@@ -1,5 +1,25 @@
 <template>
   <div class="card">
+    <VDialog header="Limitar Lista" :visible.sync="display">
+      <h6>Quantidade</h6>
+      <input type="text" v-model="limit" />
+      <h6>Pagina</h6>
+      <input type="text" v-model="skip" />
+      <template #footer>
+        <VButton
+          label="Cancelar"
+          icon="pi pi-times"
+          class="p-button-text"
+          @click="hiddenPaginateDialog"
+        />
+        <VButton
+          label="Listar"
+          icon="pi pi-check"
+          autofocus
+          @click="getTheatersPaginate"
+        />
+      </template>
+    </VDialog>
     <VDialog header="Criar Filme" :visible.sync="displayC">
       <h6>TheaterId</h6>
       <input type="text" v-model="Theaters.theaterId" />
@@ -37,8 +57,6 @@
       </template>
     </VDialog>
     <VDialog header="Atualizar Filme" :visible.sync="displayU">
-      <h6>inserir id</h6>
-      <input type="text" v-model="id" />
       <h6>TheaterId</h6>
       <input type="text" v-model="Theaters.location.address.theaterId" />
       <h5>Location:</h5>
@@ -81,6 +99,12 @@
           icon="pi pi-list"
           class="p-button-primary mr-2"
           @click="showData"
+        />
+         <VButton
+          label="Limitar Listagem"
+          icon="pi pi-list"
+          class="p-button-info mr-2"
+          @click="showPaginateDialog"
         />
         <VButton
           label="Criar"
@@ -129,6 +153,20 @@ export default {
         `Bearer ${this.$store.state.jwtToken}`
       );
     },
+     getTheatersPaginate(){
+      const data = {
+        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        limit: this.limit,
+        skip: this.skip
+      }
+      this.$store.dispatch("getTheatersPaginate", data);
+    },
+     showPaginateDialog(){
+      this.display = true
+    },
+      hiddenPaginateDialog() {
+      this.display = false;
+    },
     showCreateDialog() {
       this.displayC = true;
     },
@@ -174,6 +212,8 @@ export default {
       display: false,
       displayC: false,
       displayU: false,
+      limit: "",
+      skip: "",
       id: "",
       Theaters: {
         theaterId: "",

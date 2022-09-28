@@ -1,5 +1,25 @@
 <template>
   <div class="card">
+      <VDialog header="Limitar Lista" :visible.sync="display">
+      <h6>Quantidade</h6>
+      <input type="text" v-model="limit" />
+      <h6>Pagina</h6>
+      <input type="text" v-model="skip" />
+      <template #footer>
+        <VButton
+          label="Cancelar"
+          icon="pi pi-times"
+          class="p-button-text"
+          @click="hiddenPaginateDialog"
+        />
+        <VButton
+          label="Listar"
+          icon="pi pi-check"
+          autofocus
+          @click="getMoviesPaginate"
+        />
+      </template>
+    </VDialog>
     <VDialog header="Criar Filme" :visible.sync="displayC">
       <h6>Awards</h6>
       <input type="text" v-model="Movies.awards" />
@@ -55,8 +75,6 @@
       </template>
     </VDialog>
     <VDialog header="Atualizar Filme" :visible.sync="displayU">
-      <h6>inserir id</h6>
-      <input type="text" v-model="id" />
       <h6>Awards</h6>
       <input type="text" v-model="Movies.awards" />
       <h6>Countries</h6>
@@ -118,6 +136,12 @@
           class="p-button-primary mr-2"
           @click="showData"
         />
+         <VButton
+          label="Limitar Listagem"
+          icon="pi pi-list"
+          class="p-button-info mr-2"
+          @click="showPaginateDialog"
+        />
         <VButton
           label="Criar"
           icon="pi pi-plus"
@@ -147,6 +171,7 @@
       @row-select="onRowSelect"
     >
       <VColumn field="title" header="Title"></VColumn>
+      <VColumn field="plot" header="Plot"></VColumn>
       <VColumn field="type" header="Type"></VColumn>
       <VColumn field="year" header="Year"></VColumn>
     </VDataTable>
@@ -158,8 +183,22 @@ export default {
     onRowSelect(event) {
       this.id = event.data._id;
     },
+    getMoviesPaginate(){
+      const data = {
+        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        limit: this.limit,
+        skip: this.skip
+      }
+      this.$store.dispatch("getMoviesPaginate", data);
+    },
     showData() {
       this.$store.dispatch("getMovies", `Bearer ${this.$store.state.jwtToken}`);
+    },
+    showPaginateDialog(){
+      this.display = true
+    },
+      hiddenPaginateDialog() {
+      this.display = false;
     },
     showCreateDialog() {
       this.displayC = true;
@@ -201,6 +240,8 @@ export default {
       display: false,
       displayC: false,
       displayU: false,
+      limit: "",
+      skip: "",
       id: "",
       Movies: {
         awards: "",

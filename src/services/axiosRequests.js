@@ -8,6 +8,9 @@ export default {
     getMovies: (token) => {
         return http.get('movies', token)
     },
+    getMoviesPaginate: (token, limit, skip) => {
+        return http.get(`movies/paginate?limit=${limit}&skip=${skip}`, token)
+    },
     DeleteMovies: (token, id) => {
         return http.delete(`movies/${id}`, token)
     },
@@ -20,6 +23,9 @@ export default {
     getUsers: (token) => {
         return http.get('users', token)
     },
+    getUsersPaginate: (token, limit, skip) => {
+        return http.get(`users/paginate?limit=${limit}&skip=${skip}`, token)
+    },
     DeleteUsers: (token, id) => {
         return http.delete(`users/${id}`, token)
     },
@@ -31,6 +37,9 @@ export default {
     },
     getTheaters: (token) => {
         return http.get('theaters', token)
+    },
+    getTheatersPaginate: (token, limit, skip) => {
+        return http.get(`theaters/paginate?limit=${limit}&skip=${skip}`, token)
     },
     DeleteTheaters: (token, id) => {
         return http.delete(`theaters/${id}`, token)
