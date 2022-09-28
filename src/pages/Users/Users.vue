@@ -1,23 +1,5 @@
 <template>
   <div class="card">
-    <VDialog header="Deletar Usuario" :visible.sync="display">
-      <h6>inserir id</h6>
-      <input type="text" v-model="id" />
-      <template #footer>
-        <VButton
-          label="Cancelar"
-          icon="pi pi-times"
-          class="p-button-text"
-          @click="hiddenDeleteDialog"
-        />
-        <VButton
-          label="Deletar"
-          icon="pi pi-check"
-          autofocus
-          @click="deleteUser"
-        />
-      </template>
-    </VDialog>
     <VDialog header="Criar Usuario" :visible.sync="displayC">
       <h6>Nome</h6>
       <input type="text" v-model="Users.name" />
@@ -82,7 +64,7 @@
           label="Deletar"
           icon="pi pi-trash"
           class="p-button-danger mr-2"
-          @click="showDeleteDialog"
+          @click="deleteUser"
         />
         <VButton
           label="Atualizar"
@@ -97,8 +79,9 @@
       :paginator="true"
       :rows="10"
       stripedRows
+      selectionMode="single"
+      @row-select="onRowSelect"
     >
-      <VColumn field="_id" header="ID"></VColumn>
       <VColumn field="name" header="name"></VColumn>
       <VColumn field="email" header="email"></VColumn>
     </VDataTable>
@@ -107,14 +90,11 @@
 <script>
 export default {
   methods: {
+    onRowSelect(event){
+      this.id = event.data._id
+    },
     showData() {
       this.$store.dispatch("getUsers", `Bearer ${this.$store.state.jwtToken}`);
-    },
-    showDeleteDialog() {
-      this.display = true;
-    },
-    hiddenDeleteDialog() {
-      this.display = false;
     },
     showCreateDialog() {
       this.displayC = true;

@@ -14,7 +14,6 @@
       :rows="10"
       stripedRows
     >
-      <VColumn field="_id" header="ID"></VColumn>
       <VColumn field="user_id" header="User ID"></VColumn>
       <VColumn field="jwt" header="JWT"></VColumn>
     </VDataTable>

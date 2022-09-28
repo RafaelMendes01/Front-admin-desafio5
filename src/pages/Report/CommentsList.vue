@@ -14,7 +14,6 @@
       :rows="10"
       stripedRows
     >
-      <VColumn field="_id" header="ID"></VColumn>
       <VColumn field="name" header="Name"></VColumn>
       <VColumn field="email" header="Email"></VColumn>
       <VColumn field="movie_id" header="Movie-ID"></VColumn>

@@ -1,23 +1,5 @@
 <template>
   <div class="card">
-    <VDialog header="Deletar Filme" :visible.sync="display">
-      <h6>inserir id</h6>
-      <input type="text" v-model="id" />
-      <template #footer>
-        <VButton
-          label="Cancelar"
-          icon="pi pi-times"
-          class="p-button-text"
-          @click="hiddenDeleteDialog"
-        />
-        <VButton
-          label="Deletar"
-          icon="pi pi-check"
-          autofocus
-          @click="deleteMovie"
-        />
-      </template>
-    </VDialog>
     <VDialog header="Criar Filme" :visible.sync="displayC">
       <h6>Awards</h6>
       <input type="text" v-model="Movies.awards" />
@@ -55,7 +37,7 @@
       <input type="text" v-model="Movies.writers" />
       <h6>Year</h6>
       <input type="number" v-model="Movies.year" />
-       <h6>LastUpdated</h6>
+      <h6>LastUpdated</h6>
       <input type="string" v-model="Movies.lastupdated" />
       <template #footer>
         <VButton
@@ -75,7 +57,7 @@
     <VDialog header="Atualizar Filme" :visible.sync="displayU">
       <h6>inserir id</h6>
       <input type="text" v-model="id" />
-       <h6>Awards</h6>
+      <h6>Awards</h6>
       <input type="text" v-model="Movies.awards" />
       <h6>Countries</h6>
       <input type="text" v-model="Movies.countries" />
@@ -111,7 +93,7 @@
       <input type="text" v-model="Movies.writers" />
       <h6>Year</h6>
       <input type="number" v-model="Movies.year" />
-       <h6>LastUpdated</h6>
+      <h6>LastUpdated</h6>
       <input type="string" v-model="Movies.lastupdated" />
       <template #footer>
         <VButton
@@ -146,7 +128,7 @@
           label="Deletar"
           icon="pi pi-trash"
           class="p-button-danger mr-2"
-          @click="showDeleteDialog"
+          @click="deleteMovie"
         />
         <VButton
           label="Atualizar"
@@ -161,8 +143,9 @@
       :paginator="true"
       :rows="10"
       stripedRows
+      selectionMode="single"
+      @row-select="onRowSelect"
     >
-      <VColumn field="_id" header="ID"></VColumn>
       <VColumn field="title" header="Title"></VColumn>
       <VColumn field="type" header="Type"></VColumn>
       <VColumn field="year" header="Year"></VColumn>
@@ -172,14 +155,11 @@
 <script>
 export default {
   methods: {
+    onRowSelect(event) {
+      this.id = event.data._id;
+    },
     showData() {
       this.$store.dispatch("getMovies", `Bearer ${this.$store.state.jwtToken}`);
-    },
-    showDeleteDialog() {
-      this.display = true;
-    },
-    hiddenDeleteDialog() {
-      this.display = false;
     },
     showCreateDialog() {
       this.displayC = true;
@@ -211,10 +191,10 @@ export default {
       const data = {
         Movies: this.Movies,
         jwt: `Bearer ${this.$store.state.jwtToken}`,
-        id: this.id
+        id: this.id,
       };
-       this.$store.dispatch("updateMovies", data);
-    }
+      this.$store.dispatch("updateMovies", data);
+    },
   },
   data() {
     return {
@@ -241,7 +221,7 @@ export default {
         type: "",
         writers: "",
         year: "",
-        lastupdated: ""
+        lastupdated: "",
       },
     };
   },

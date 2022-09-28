@@ -1,23 +1,5 @@
 <template>
   <div class="card">
-    <VDialog header="Deletar Filme" :visible.sync="display">
-      <h6>inserir id</h6>
-      <input type="text" v-model="id" />
-      <template #footer>
-        <VButton
-          label="Cancelar"
-          icon="pi pi-times"
-          class="p-button-text"
-          @click="hiddenDeleteDialog"
-        />
-        <VButton
-          label="Deletar"
-          icon="pi pi-check"
-          autofocus
-          @click="deleteTheater"
-        />
-      </template>
-    </VDialog>
     <VDialog header="Criar Filme" :visible.sync="displayC">
       <h6>TheaterId</h6>
       <input type="text" v-model="Theaters.theaterId" />
@@ -110,7 +92,7 @@
           label="Deletar"
           icon="pi pi-trash"
           class="p-button-danger mr-2"
-          @click="showDeleteDialog"
+          @click="deleteTheater"
         />
         <VButton
           label="Atualizar"
@@ -125,8 +107,9 @@
       :paginator="true"
       :rows="10"
       stripedRows
+      selectionMode="single"
+      @row-select="onRowSelect"
     >
-      <VColumn field="_id" header="ID"></VColumn>
       <VColumn field="theaterId" header="Theater-id"></VColumn>
       <VColumn field="location.address.street1" header="Street"></VColumn>
       <VColumn field="location.address.city" header="City"></VColumn>
@@ -137,17 +120,14 @@
 <script>
 export default {
   methods: {
+     onRowSelect(event){
+      this.id = event.data._id
+    },
     showData() {
       this.$store.dispatch(
         "getTheaters",
         `Bearer ${this.$store.state.jwtToken}`
       );
-    },
-    showDeleteDialog() {
-      this.display = true;
-    },
-    hiddenDeleteDialog() {
-      this.display = false;
     },
     showCreateDialog() {
       this.displayC = true;
