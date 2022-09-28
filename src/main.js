@@ -25,6 +25,8 @@ import PrimeVue from 'primevue/config';
 import 'primevue/resources/themes/bootstrap4-light-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
+import ToastService from 'primevue/toastservice';
+import Toast from 'primevue/toast';
 
 // LightBootstrap plugin
 import LightBootstrap from './light-bootstrap-main'
@@ -37,7 +39,9 @@ import './registerServiceWorker'
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
 Vue.use(PrimeVue)
+Vue.use(ToastService);
 Vue.component('VDataTable', DataTable)
+Vue.component('VToast', Toast)
 Vue.component('VColumn', Column)
 Vue.component('VButton', Button)
 Vue.component('VDialog', Dialog)
