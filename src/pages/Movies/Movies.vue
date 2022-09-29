@@ -1,6 +1,7 @@
 <template>
   <div class="card">
-      <VDialog header="Limitar Lista" :visible.sync="display">
+    <VConfirmDialog> </VConfirmDialog>
+    <VDialog header="Limitar Lista" :visible.sync="display">
       <h6>Quantidade</h6>
       <input type="text" v-model="limit" />
       <h6>Pagina</h6>
@@ -21,44 +22,46 @@
       </template>
     </VDialog>
     <VDialog header="Criar Filme" :visible.sync="displayC">
-      <h6>Awards</h6>
-      <input type="text" v-model="Movies.awards" />
-      <h6>Countries</h6>
-      <input type="text" v-model="Movies.countries" />
-      <h6>Directors</h6>
-      <input type="text" v-model="Movies.directors" />
-      <h6>Fullplot</h6>
-      <input type="text" v-model="Movies.fullPlot" />
-      <h6>Genres</h6>
-      <input type="text" v-model="Movies.genres" />
-      <h6>IMDB</h6>
-      <input type="text" v-model="Movies.imdb" />
-      <h6>Languages</h6>
-      <input type="text" v-model="Movies.languages" />
-      <h6>Metacritic</h6>
-      <input type="text" v-model="Movies.metacritic" />
-      <h6>Plot</h6>
-      <input type="text" v-model="Movies.plot" />
-      <h6>Poster</h6>
-      <input type="text" v-model="Movies.poster" />
-      <h6>Rated</h6>
-      <input type="text" v-model="Movies.rated" />
-      <h6>Released</h6>
-      <input type="text" v-model="Movies.released" />
-      <h6>Runtime</h6>
-      <input type="text" v-model="Movies.runtime" />
-      <h6>Title</h6>
-      <input type="text" v-model="Movies.title" />
-      <h6>Tomatoes</h6>
-      <input type="text" v-model="Movies.tomatoes" />
-      <h6>Type</h6>
-      <input type="text" v-model="Movies.type" />
-      <h6>Writers</h6>
-      <input type="text" v-model="Movies.writers" />
-      <h6>Year</h6>
-      <input type="number" v-model="Movies.year" />
-      <h6>LastUpdated</h6>
-      <input type="string" v-model="Movies.lastupdated" />
+      <div class="dialog">
+        <h6>Awards</h6>
+        <input type="text" v-model="Movies.awards" />
+        <h6>Countries</h6>
+        <input type="text" v-model="Movies.countries" />
+        <h6>Directors</h6>
+        <input type="text" v-model="Movies.directors" />
+        <h6>Fullplot</h6>
+        <input type="text" v-model="Movies.fullPlot" />
+        <h6>Genres</h6>
+        <input type="text" v-model="Movies.genres" />
+        <h6>IMDB</h6>
+        <input type="text" v-model="Movies.imdb" />
+        <h6>Languages</h6>
+        <input type="text" v-model="Movies.languages" />
+        <h6>Metacritic</h6>
+        <input type="text" v-model="Movies.metacritic" />
+        <h6>Plot</h6>
+        <input type="text" v-model="Movies.plot" />
+        <h6>Poster</h6>
+        <input type="text" v-model="Movies.poster" />
+        <h6>Rated</h6>
+        <input type="text" v-model="Movies.rated" />
+        <h6>Released</h6>
+        <input type="text" v-model="Movies.released" />
+        <h6>Runtime</h6>
+        <input type="text" v-model="Movies.runtime" />
+        <h6>Title</h6>
+        <input type="text" v-model="Movies.title" />
+        <h6>Tomatoes</h6>
+        <input type="text" v-model="Movies.tomatoes" />
+        <h6>Type</h6>
+        <input type="text" v-model="Movies.type" />
+        <h6>Writers</h6>
+        <input type="text" v-model="Movies.writers" />
+        <h6>Year</h6>
+        <input type="number" v-model="Movies.year" />
+        <h6>LastUpdated</h6>
+        <input type="string" v-model="Movies.lastupdated" />
+      </div>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -74,45 +77,47 @@
         />
       </template>
     </VDialog>
-    <VDialog header="Atualizar Filme" :visible.sync="displayU">
-      <h6>Awards</h6>
-      <input type="text" v-model="Movies.awards" />
-      <h6>Countries</h6>
-      <input type="text" v-model="Movies.countries" />
-      <h6>Directors</h6>
-      <input type="text" v-model="Movies.directors" />
-      <h6>Fullplot</h6>
-      <input type="text" v-model="Movies.fullPlot" />
-      <h6>Genres</h6>
-      <input type="text" v-model="Movies.genres" />
-      <h6>IMDB</h6>
-      <input type="text" v-model="Movies.imdb" />
-      <h6>Languages</h6>
-      <input type="text" v-model="Movies.languages" />
-      <h6>Metacritic</h6>
-      <input type="text" v-model="Movies.metacritic" />
-      <h6>Plot</h6>
-      <input type="text" v-model="Movies.plot" />
-      <h6>Poster</h6>
-      <input type="text" v-model="Movies.poster" />
-      <h6>Rated</h6>
-      <input type="text" v-model="Movies.rated" />
-      <h6>Released</h6>
-      <input type="text" v-model="Movies.released" />
-      <h6>Runtime</h6>
-      <input type="text" v-model="Movies.runtime" />
-      <h6>Title</h6>
-      <input type="text" v-model="Movies.title" />
-      <h6>Tomatoes</h6>
-      <input type="text" v-model="Movies.tomatoes" />
-      <h6>Type</h6>
-      <input type="text" v-model="Movies.type" />
-      <h6>Writers</h6>
-      <input type="text" v-model="Movies.writers" />
-      <h6>Year</h6>
-      <input type="number" v-model="Movies.year" />
-      <h6>LastUpdated</h6>
-      <input type="string" v-model="Movies.lastupdated" />
+    <VDialog :header="updateMessage" :visible.sync="displayU">
+      <div class="dialog">
+        <h6>Awards</h6>
+        <input type="text" v-model="Movies.awards" />
+        <h6>Countries</h6>
+        <input type="text" v-model="Movies.countries" />
+        <h6>Directors</h6>
+        <input type="text" v-model="Movies.directors" />
+        <h6>Fullplot</h6>
+        <input type="text" v-model="Movies.fullPlot" />
+        <h6>Genres</h6>
+        <input type="text" v-model="Movies.genres" />
+        <h6>IMDB</h6>
+        <input type="text" v-model="Movies.imdb" />
+        <h6>Languages</h6>
+        <input type="text" v-model="Movies.languages" />
+        <h6>Metacritic</h6>
+        <input type="text" v-model="Movies.metacritic" />
+        <h6>Plot</h6>
+        <input type="text" v-model="Movies.plot" />
+        <h6>Poster</h6>
+        <input type="text" v-model="Movies.poster" />
+        <h6>Rated</h6>
+        <input type="text" v-model="Movies.rated" />
+        <h6>Released</h6>
+        <input type="text" v-model="Movies.released" />
+        <h6>Runtime</h6>
+        <input type="text" v-model="Movies.runtime" />
+        <h6>Title</h6>
+        <input type="text" v-model="Movies.title" />
+        <h6>Tomatoes</h6>
+        <input type="text" v-model="Movies.tomatoes" />
+        <h6>Type</h6>
+        <input type="text" v-model="Movies.type" />
+        <h6>Writers</h6>
+        <input type="text" v-model="Movies.writers" />
+        <h6>Year</h6>
+        <input type="number" v-model="Movies.year" />
+        <h6>LastUpdated</h6>
+        <input type="string" v-model="Movies.lastupdated" />
+      </div>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -128,17 +133,17 @@
         />
       </template>
     </VDialog>
-    <div class="mr-4">
+    <div class="mx-2 my-3">
       <template>
         <VButton
-          label="Listar"
+          label="Listar Todos"
           icon="pi pi-list"
           class="p-button-primary mr-2"
           @click="showData"
         />
-         <VButton
+        <VButton
           label="Limitar Listagem"
-          icon="pi pi-list"
+          icon="pi pi-sliders-h"
           class="p-button-info mr-2"
           @click="showPaginateDialog"
         />
@@ -166,9 +171,9 @@
       :value="this.$store.state.Movies"
       :paginator="true"
       :rows="10"
-      stripedRows
       selectionMode="single"
       @row-select="onRowSelect"
+      showGridlines
     >
       <VColumn field="title" header="Title"></VColumn>
       <VColumn field="plot" header="Plot"></VColumn>
@@ -182,22 +187,25 @@ export default {
   methods: {
     onRowSelect(event) {
       this.id = event.data._id;
+      this.movieName = event.data.title
+      this.updateMessage = `Atualizar Filme: ${this.movieName}`;
     },
-    getMoviesPaginate(){
+    getMoviesPaginate() {
       const data = {
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        jwt: `Bearer ${this.jwt}`,
         limit: this.limit,
-        skip: this.skip
-      }
+        skip: this.skip,
+      };
       this.$store.dispatch("getMoviesPaginate", data);
+      this.display = false;
     },
     showData() {
-      this.$store.dispatch("getMovies", `Bearer ${this.$store.state.jwtToken}`);
+      this.$store.dispatch("getMovies", `Bearer ${this.jwt}`);
     },
-    showPaginateDialog(){
-      this.display = true
+    showPaginateDialog() {
+      this.display = true;
     },
-      hiddenPaginateDialog() {
+    hiddenPaginateDialog() {
       this.display = false;
     },
     showCreateDialog() {
@@ -213,26 +221,37 @@ export default {
       this.displayU = false;
     },
     deleteMovie() {
-      const data = {
-        id: this.id,
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
-      };
-      this.$store.dispatch("deleteMovies", data);
+      this.$confirm.require({
+        message: `Deseja Remover: ${this.movieName}`,
+        header: "Confirmação",
+        icon: "pi pi-exclamation-triangle",
+        acceptLabel: "Deletar",
+        rejectLabel: "Cancelar",
+        accept: () => {
+          const data = {
+            id: this.id,
+            jwt: `Bearer ${this.jwt}`,
+          };
+          this.$store.dispatch("deleteMovies", data);
+        },
+      });
     },
     createMovie() {
       const data = {
         Movies: this.Movies,
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        jwt: `Bearer ${this.jwt}`,
       };
       this.$store.dispatch("createMovies", data);
+      this.displayC = false;
     },
     updateMovie() {
       const data = {
         Movies: this.Movies,
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        jwt: `Bearer ${this.jwt}`,
         id: this.id,
       };
       this.$store.dispatch("updateMovies", data);
+      this.displayU = false;
     },
   },
   data() {
@@ -240,9 +259,12 @@ export default {
       display: false,
       displayC: false,
       displayU: false,
+      jwt: localStorage.getItem("token"),
       limit: "",
       skip: "",
       id: "",
+      movieName: "",
+      updateMessage: "Nenhum filme selecionado",
       Movies: {
         awards: "",
         countries: "",
@@ -269,5 +291,7 @@ export default {
 };
 </script>
 <style scoped>
+.dialog {
+  column-count: 4;
+}
 </style>
-

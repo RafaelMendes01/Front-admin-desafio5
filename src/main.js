@@ -13,6 +13,8 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
+import ConfirmationService from 'primevue/confirmationservice';
+import ConfirmDialog from 'primevue/confirmdialog';
 import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
 import DataTable from 'primevue/datatable';
@@ -40,7 +42,9 @@ Vue.use(VueRouter)
 Vue.use(LightBootstrap)
 Vue.use(PrimeVue)
 Vue.use(ToastService);
+Vue.use(ConfirmationService);
 Vue.component('VDataTable', DataTable)
+Vue.component('VConfirmDialog', ConfirmDialog)
 Vue.component('VToast', Toast)
 Vue.component('VColumn', Column)
 Vue.component('VButton', Button)

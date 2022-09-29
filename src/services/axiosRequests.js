@@ -53,7 +53,13 @@ export default {
     getComments: (token) => {
         return http.get('comments', token)
     },
+    getCommentsPaginate: (token, limit, skip) => {
+        return http.get(`comments/paginate?limit=${limit}&skip=${skip}`, token)
+    },
     getSessions: (token) => {
         return http.get('sessions', token)
+    },
+    getSessionsPaginate: (token, limit, skip) => {
+        return http.get(`sessions/paginate?limit=${limit}&skip=${skip}`, token)
     },
 }

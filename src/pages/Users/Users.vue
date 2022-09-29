@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+    <VConfirmDialog> </VConfirmDialog>
     <VDialog header="Limitar Lista" :visible.sync="display">
       <h6>Quantidade</h6>
       <input type="text" v-model="limit" />
@@ -42,7 +43,7 @@
         />
       </template>
     </VDialog>
-    <VDialog header="Atualizar Usuario" :visible.sync="displayU">
+    <VDialog :header="updateMessage" :visible.sync="displayU">
       <h6>Nome</h6>
       <input type="text" v-model="Users.name" />
       <h6>Email</h6>
@@ -64,17 +65,17 @@
         />
       </template>
     </VDialog>
-    <div class="mr-4">
+    <div class="mx-2 my-3">
       <template>
         <VButton
-          label="Listar"
+          label="Listar Todos"
           icon="pi pi-list"
           class="p-button-primary mr-2"
           @click="showData"
         />
         <VButton
           label="Limitar Listagem"
-          icon="pi pi-list"
+          icon="pi pi-sliders-h"
           class="p-button-info mr-2"
           @click="showPaginateDialog"
         />
@@ -102,7 +103,7 @@
       :value="this.$store.state.Users"
       :paginator="true"
       :rows="10"
-      stripedRows
+      showGridlines
       selectionMode="single"
       @row-select="onRowSelect"
     >
@@ -116,17 +117,20 @@ export default {
   methods: {
     onRowSelect(event) {
       this.id = event.data._id;
+      this.UserName = event.data.name;
+      this.updateMessage = `Atualizar Usuario: ${this.UserName}`;
     },
     getUsersPaginate() {
       const data = {
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        jwt: `Bearer ${this.jwt}`,
         limit: this.limit,
         skip: this.skip,
       };
       this.$store.dispatch("getUsersPaginate", data);
+      this.display = false;
     },
     showData() {
-      this.$store.dispatch("getUsers", `Bearer ${this.$store.state.jwtToken}`);
+      this.$store.dispatch("getUsers", `Bearer ${this.jwt}`);
     },
     showPaginateDialog() {
       this.display = true;
@@ -147,22 +151,33 @@ export default {
       this.displayU = false;
     },
     deleteUser() {
-      const data = {
-        id: this.id,
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
-      };
-      this.$store.dispatch("deleteUsers", data);
+      this.$confirm.require({
+        message: `Deseja Remover: ${this.UserName}`,
+        header: "Confirmação",
+        icon: "pi pi-exclamation-triangle",
+        acceptLabel: "Deletar",
+        rejectLabel: "Cancelar",
+        accept: () => {
+          const data = {
+            id: this.id,
+            jwt: `Bearer ${this.jwt}`,
+          };
+          this.$store.dispatch("deleteUsers", data);
+        },
+      });
     },
     createUser() {
       this.$store.dispatch("createUsers", this.Users);
+      this.displayC = false;
     },
     updateUser() {
       const data = {
         Users: this.Users,
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        jwt: `Bearer ${this.jwt}`,
         id: this.id,
       };
       this.$store.dispatch("updateUsers", data);
+      this.displayU = false;
     },
   },
   data() {
@@ -170,6 +185,9 @@ export default {
       display: false,
       displayC: false,
       displayU: false,
+      jwt: localStorage.getItem("token"),
+      UserName: "",
+      updateMessage: "Nenhum usuario selecionado",
       limit: "",
       skip: "",
       id: "",
