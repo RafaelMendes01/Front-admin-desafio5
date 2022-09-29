@@ -13,11 +13,13 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
+import InputText from 'primevue/inputtext';
 import ConfirmationService from 'primevue/confirmationservice';
 import ConfirmDialog from 'primevue/confirmdialog';
 import Dialog from 'primevue/dialog';
 import Button from 'primevue/button';
 import DataTable from 'primevue/datatable';
+import Chips from 'primevue/chips';
 import Column from 'primevue/column';
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -45,8 +47,10 @@ Vue.use(ToastService);
 Vue.use(ConfirmationService);
 Vue.component('VDataTable', DataTable)
 Vue.component('VConfirmDialog', ConfirmDialog)
+Vue.component('VInput', InputText)
 Vue.component('VToast', Toast)
 Vue.component('VColumn', Column)
+Vue.component('VChips', Chips)
 Vue.component('VButton', Button)
 Vue.component('VDialog', Dialog)
 

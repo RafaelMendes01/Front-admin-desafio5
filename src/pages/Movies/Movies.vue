@@ -22,45 +22,99 @@
       </template>
     </VDialog>
     <VDialog header="Criar Filme" :visible.sync="displayC">
-      <div class="dialog">
-        <h6>Awards</h6>
-        <input type="text" v-model="Movies.awards" />
-        <h6>Countries</h6>
-        <input type="text" v-model="Movies.countries" />
-        <h6>Directors</h6>
-        <input type="text" v-model="Movies.directors" />
-        <h6>Fullplot</h6>
-        <input type="text" v-model="Movies.fullPlot" />
-        <h6>Genres</h6>
-        <input type="text" v-model="Movies.genres" />
-        <h6>IMDB</h6>
-        <input type="text" v-model="Movies.imdb" />
-        <h6>Languages</h6>
-        <input type="text" v-model="Movies.languages" />
-        <h6>Metacritic</h6>
-        <input type="text" v-model="Movies.metacritic" />
-        <h6>Plot</h6>
-        <input type="text" v-model="Movies.plot" />
-        <h6>Poster</h6>
-        <input type="text" v-model="Movies.poster" />
-        <h6>Rated</h6>
-        <input type="text" v-model="Movies.rated" />
-        <h6>Released</h6>
-        <input type="text" v-model="Movies.released" />
-        <h6>Runtime</h6>
-        <input type="text" v-model="Movies.runtime" />
-        <h6>Title</h6>
-        <input type="text" v-model="Movies.title" />
-        <h6>Tomatoes</h6>
-        <input type="text" v-model="Movies.tomatoes" />
-        <h6>Type</h6>
-        <input type="text" v-model="Movies.type" />
-        <h6>Writers</h6>
-        <input type="text" v-model="Movies.writers" />
-        <h6>Year</h6>
-        <input type="number" v-model="Movies.year" />
-        <h6>LastUpdated</h6>
-        <input type="string" v-model="Movies.lastupdated" />
+      <div class="dialog my-2">
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.awards" id="Awards" />
+            <label for="Awards">Awards</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.countries" id="Countries" />
+            <label for="Countries">Countries</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.directors" id="Directors" />
+            <label for="Directors">Directors</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.fullPlot" id="Fullplot" />
+            <label for="Fullplot">Fullplot</label>
+          </span>
+          <span class="p-float-label">
+            <VChips v-model="Movies.genres" id="Genres" />
+            <label for="Genres">Genres</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.imdb" id="IMDB" />
+            <label for="IMDB">IMDB</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.languages" id="Languages" />
+            <label for="Languages">Languages</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.metacritic" id="Metacritic" />
+            <label for="Metacritic">Metacritic</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.plot" id="Plot" />
+            <label for="Plot">Plot</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.poster" id="Poster" />
+            <label for="Poster">Poster</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.rated" />
+            <label for="Rated">Rated</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.released" id="Released" />
+            <label for="Released">Released</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.runtime" id="Runtime" />
+            <label for="Runtime">Runtime</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.title" id="Title" />
+            <label for="Title">Title</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.tomatoes" id="Tomatoes" />
+            <label for="Tomatoes">Tomatoes</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.type" id="Type" />
+            <label for="Type">Type</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.writers" id="Writers" />
+            <label for="Writers">Writers</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.writers" id="Writers" />
+            <label for="Writers">Writers</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="number" v-model="Movies.year" id="Year" />
+            <label for="Year">Year</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="string"
+              v-model="Movies.lastupdated"
+              id="LastUpdated"
+            />
+            <label for="LastUpdated">LastUpdated</label>
+          </span>
+        </div>
       </div>
       <template #footer>
         <VButton
@@ -187,7 +241,7 @@ export default {
   methods: {
     onRowSelect(event) {
       this.id = event.data._id;
-      this.movieName = event.data.title
+      this.movieName = event.data.title;
       this.updateMessage = `Atualizar Filme: ${this.movieName}`;
     },
     getMoviesPaginate() {
@@ -270,7 +324,7 @@ export default {
         countries: "",
         directors: "",
         fullolot: "",
-        genres: "",
+        genres: [],
         imdb: "",
         Languages: "",
         metacritic: "",
@@ -291,7 +345,14 @@ export default {
 };
 </script>
 <style scoped>
-.dialog {
-  column-count: 4;
+.dialog{
+  display: flex;
+  gap: 1rem;
+}
+.inputField{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
 }
 </style>

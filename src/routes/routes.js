@@ -20,6 +20,14 @@ import Report from 'src/pages/Report/Report.vue'
 import SessionsTable from 'src/pages/Report/SessionsList.vue'
 import CommentsTable from 'src/pages/Report/CommentsList.vue'
 
+const authGuard = () => (to,from,next) => {
+  if (localStorage.getItem("token") || "") {
+    next();
+  } else {
+    next("/");
+  }
+};
+
 const routes = [
   {
     path: '/',
@@ -28,82 +36,98 @@ const routes = [
   {
     path: '/dashboard',
     component: DashBoard,
+    beforeEnter: authGuard(),
   },
   {
     path: '/admin',
     component: DashboardLayout,
+    beforeEnter: authGuard(),
     children: [
       {
         path: 'Movies',
         name: 'Movies',
-        component: Movies
+        component: Movies,
+        beforeEnter: authGuard(),
       },
       {
         path: 'Users',
         name: 'Users',
-        component: Users
+        component: Users,
+        beforeEnter: authGuard(),
       },
       {
         path: 'Theaters',
         name: 'Theaters',
-        component: Theaters
+        component: Theaters,
+        beforeEnter: authGuard(),
       },
       {
         path: 'Report',
         name: 'Report',
         component: Report,
+        beforeEnter: authGuard(),
         children: [
           {
             path: 'SessionsTable',
             name: 'SessionsTable',
             component: SessionsTable,
+            beforeEnter: authGuard(),
           },
           {
             path: 'CommentsTable',
             name: 'CommentsTable',
             component: CommentsTable,
+            beforeEnter: authGuard(),
           }
         ]
       },
       {
         path: 'overview',
         name: 'Overview',
-        component: Overview
+        component: Overview,
+        beforeEnter: authGuard(),
       },
       {
         path: 'user',
         name: 'User',
-        component: UserProfile
+        component: UserProfile,
+        beforeEnter: authGuard(),
       },
       {
         path: 'table-list',
         name: 'Table List',
-        component: TableList
+        component: TableList,
+        beforeEnter: authGuard(),
       },
       {
         path: 'typography',
         name: 'Typography',
-        component: Typography
+        component: Typography,
+        beforeEnter: authGuard(),
       },
       {
         path: 'icons',
         name: 'Icons',
-        component: Icons
+        component: Icons,
+        beforeEnter: authGuard(),
       },
       {
         path: 'maps',
         name: 'Maps',
-        component: Maps
+        component: Maps,
+        beforeEnter: authGuard(),
       },
       {
         path: 'notifications',
         name: 'Notifications',
-        component: Notifications
+        component: Notifications,
+        beforeEnter: authGuard(),
       },
       {
         path: 'upgrade',
         name: 'Upgrade to PRO',
-        component: Upgrade
+        component: Upgrade,
+        beforeEnter: authGuard(),
       }
     ]
   },

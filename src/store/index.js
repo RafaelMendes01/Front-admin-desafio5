@@ -59,8 +59,8 @@ export default new vuex.Store({
                         data
                     };
                     commit('Login', userData);
-                    window.location.replace('/#/admin/Movies')
                     localStorage.setItem('token', userData.jwt )
+                    window.location.replace('/#/admin/Movies')
                 })
                 .catch(error => {
                     commit("setErrorMessage", error.message);
