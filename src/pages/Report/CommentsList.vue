@@ -39,7 +39,7 @@
     <VDataTable
       :value="this.$store.state.Comments"
       :paginator="true"
-      :rows="10"
+      :rows="15"
       showGridlines
     >
       <VColumn field="name" header="Name"></VColumn>

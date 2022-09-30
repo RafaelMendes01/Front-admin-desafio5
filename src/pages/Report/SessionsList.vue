@@ -39,7 +39,7 @@
     <VDataTable
       :value="this.$store.state.Sessions"
       :paginator="true"
-      :rows="10"
+      :rows="15"
       showGridlines
     >
       <VColumn field="user_id" header="User ID"></VColumn>

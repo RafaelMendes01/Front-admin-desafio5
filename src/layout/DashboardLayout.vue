@@ -18,15 +18,16 @@
         <i class="nc-icon nc-notes"></i>
         <p>Formularios</p>
       </sidebar-link>
+      <sidebar-link to="/">
+        <i class="nc-icon nc-button-power"></i>
+        <p>Log-Out</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
-      <top-navbar></top-navbar>
 
       <dashboard-content @click="toggleSidebar">
 
       </dashboard-content>
-
-      <content-footer></content-footer>
     </div>
   </div>
 </template>

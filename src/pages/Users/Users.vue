@@ -122,7 +122,7 @@
     <VDataTable
       :value="this.$store.state.Users"
       :paginator="true"
-      :rows="10"
+      :rows="15"
       showGridlines
       selectionMode="single"
       @row-select="onRowSelect"

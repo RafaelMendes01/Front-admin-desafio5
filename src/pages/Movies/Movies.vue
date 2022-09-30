@@ -600,7 +600,7 @@
     <VDataTable
       :value="this.$store.state.Movies"
       :paginator="true"
-      :rows="10"
+      :rows="15"
       selectionMode="single"
       @row-select="onRowSelect"
       showGridlines
