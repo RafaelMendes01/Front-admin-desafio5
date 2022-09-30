@@ -21,41 +21,62 @@
         />
       </template>
     </VDialog>
-    <VDialog header="Criar Filme" :visible.sync="displayC">
+    <VDialog header="Criar Filme" :visible.sync="displayC" class="createDialog">
       <div class="dialog my-2">
         <div class="inputField">
           <span class="p-float-label">
-            <VInput type="text" v-model="Movies.awards" id="Awards" />
-            <label for="Awards">Awards</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.countries" id="Countries" />
+            <VChips
+              v-model="Movies.countries"
+              id="Countries"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
             <label for="Countries">Countries</label>
           </span>
           <span class="p-float-label">
-            <VInput type="text" v-model="Movies.directors" id="Directors" />
+            <VChips
+              v-model="Movies.directors"
+              id="Directors"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
             <label for="Directors">Directors</label>
           </span>
           <span class="p-float-label">
-            <VInput type="text" v-model="Movies.fullPlot" id="Fullplot" />
+            <VInput type="text" v-model="Movies.fullplot" id="Fullplot" />
             <label for="Fullplot">Fullplot</label>
           </span>
           <span class="p-float-label">
-            <VChips v-model="Movies.genres" id="Genres" />
+            <VChips
+              v-model="Movies.genres"
+              id="Genres"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
             <label for="Genres">Genres</label>
           </span>
         </div>
+
         <div class="inputField">
           <span class="p-float-label">
-            <VInput type="text" v-model="Movies.imdb" id="IMDB" />
-            <label for="IMDB">IMDB</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.languages" id="Languages" />
+            <VChips
+              v-model="Movies.languages"
+              id="Languages"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
             <label for="Languages">Languages</label>
           </span>
           <span class="p-float-label">
-            <VInput type="text" v-model="Movies.metacritic" id="Metacritic" />
+            <VNumber
+              v-model="Movies.metacritic"
+              id="Metacritic"
+              :useGrouping="false"
+              :minFractionDigits="1"
+              :maxFractionDigits="1"
+              :min="0.0"
+              :max="10.0"
+            />
             <label for="Metacritic">Metacritic</label>
           </span>
           <span class="p-float-label">
@@ -67,6 +88,7 @@
             <label for="Poster">Poster</label>
           </span>
         </div>
+
         <div class="inputField">
           <span class="p-float-label">
             <VInput type="text" v-model="Movies.rated" />
@@ -77,33 +99,39 @@
             <label for="Released">Released</label>
           </span>
           <span class="p-float-label">
-            <VInput type="text" v-model="Movies.runtime" id="Runtime" />
+            <VNumber
+              v-model="Movies.runtime"
+              id="Runtime"
+              :useGrouping="false"
+            />
             <label for="Runtime">Runtime</label>
           </span>
           <span class="p-float-label">
             <VInput type="text" v-model="Movies.title" id="Title" />
             <label for="Title">Title</label>
           </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.tomatoes" id="Tomatoes" />
-            <label for="Tomatoes">Tomatoes</label>
-          </span>
         </div>
+
         <div class="inputField">
           <span class="p-float-label">
             <VInput type="text" v-model="Movies.type" id="Type" />
             <label for="Type">Type</label>
           </span>
           <span class="p-float-label">
-            <VInput type="text" v-model="Movies.writers" id="Writers" />
+            <VChips
+              v-model="Movies.writers"
+              id="Writers"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
             <label for="Writers">Writers</label>
           </span>
           <span class="p-float-label">
-            <VInput type="text" v-model="Movies.writers" id="Writers" />
-            <label for="Writers">Writers</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="number" v-model="Movies.year" id="Year" />
+            <VNumber
+              v-model="Movies.year"
+              id="Year"
+              :useGrouping="false"
+            />
             <label for="Year">Year</label>
           </span>
           <span class="p-float-label">
@@ -114,6 +142,141 @@
             />
             <label for="LastUpdated">LastUpdated</label>
           </span>
+        </div>
+
+        <div class="inputField">
+          <VAccordion>
+            <VAccordionTab header="Awards">
+              <VNumber
+                v-model="Movies.awards.nominations"
+                :useGrouping="false"
+                placeholder="nominations"
+                class="mb-2"
+              />
+              <VInput
+                type="text"
+                v-model="Movies.awards.text"
+                placeholder="text"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.awards.wins"
+                :useGrouping="false"
+                placeholder="wins"
+                class="mb-2"
+              />
+            </VAccordionTab>
+          </VAccordion>
+          <VAccordion>
+            <VAccordionTab header="Tomatoes">
+              <VInput
+                type="text"
+                v-model="Movies.tomatoes.boxOffice"
+                placeholder="boxOffice"
+                class="mb-2"
+              />
+              <VInput
+                type="text"
+                v-model="Movies.tomatoes.consensus"
+                placeholder="consensus"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.critic.meter"
+                :useGrouping="false"
+                placeholder="critic meter"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.critic.numReviews"
+                :useGrouping="false"
+                placeholder="critic numRevies"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.critic.rating"
+                :useGrouping="false"
+                placeholder="critic rating"
+                class="mb-2"
+              />
+              <VInput
+                v-model="Movies.tomatoes.dvd"
+                :useGrouping="false"
+                placeholder="dvd"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.fresh"
+                :useGrouping="false"
+                placeholder="fresh"
+                class="mb-2"
+              />
+              <VInput
+                v-model="Movies.tomatoes.lastUpdated"
+                :useGrouping="false"
+                placeholder="lastUpdated"
+                class="mb-2"
+              />
+              <VInput
+                type="text"
+                v-model="Movies.tomatoes.production"
+                placeholder="production"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.rotten"
+                :useGrouping="false"
+                placeholder="rotten"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.viewer.meter"
+                :useGrouping="false"
+                placeholder="viewer meter"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.viewer.numReviews"
+                :useGrouping="false"
+                placeholder="viewer numRevies"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.viewer.rating"
+                :useGrouping="false"
+                placeholder="viewer rating"
+                class="mb-2"
+              />
+              <VInput
+                type="text"
+                v-model="Movies.tomatoes.website"
+                placeholder="website"
+                class="mb-2"
+              />
+            </VAccordionTab>
+          </VAccordion>
+          <VAccordion>
+            <VAccordionTab header="IMDB">
+              <VNumber
+                v-model="Movies.imdb.id"
+                :useGrouping="false"
+                placeholder="id"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.imdb.rating"
+                :useGrouping="false"
+                placeholder="rating"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.imdb.votes"
+                :useGrouping="false"
+                placeholder="votes"
+                class="mb-2"
+              />
+            </VAccordionTab>
+          </VAccordion>
         </div>
       </div>
       <template #footer>
@@ -132,45 +295,262 @@
       </template>
     </VDialog>
     <VDialog :header="updateMessage" :visible.sync="displayU">
-      <div class="dialog">
-        <h6>Awards</h6>
-        <input type="text" v-model="Movies.awards" />
-        <h6>Countries</h6>
-        <input type="text" v-model="Movies.countries" />
-        <h6>Directors</h6>
-        <input type="text" v-model="Movies.directors" />
-        <h6>Fullplot</h6>
-        <input type="text" v-model="Movies.fullPlot" />
-        <h6>Genres</h6>
-        <input type="text" v-model="Movies.genres" />
-        <h6>IMDB</h6>
-        <input type="text" v-model="Movies.imdb" />
-        <h6>Languages</h6>
-        <input type="text" v-model="Movies.languages" />
-        <h6>Metacritic</h6>
-        <input type="text" v-model="Movies.metacritic" />
-        <h6>Plot</h6>
-        <input type="text" v-model="Movies.plot" />
-        <h6>Poster</h6>
-        <input type="text" v-model="Movies.poster" />
-        <h6>Rated</h6>
-        <input type="text" v-model="Movies.rated" />
-        <h6>Released</h6>
-        <input type="text" v-model="Movies.released" />
-        <h6>Runtime</h6>
-        <input type="text" v-model="Movies.runtime" />
-        <h6>Title</h6>
-        <input type="text" v-model="Movies.title" />
-        <h6>Tomatoes</h6>
-        <input type="text" v-model="Movies.tomatoes" />
-        <h6>Type</h6>
-        <input type="text" v-model="Movies.type" />
-        <h6>Writers</h6>
-        <input type="text" v-model="Movies.writers" />
-        <h6>Year</h6>
-        <input type="number" v-model="Movies.year" />
-        <h6>LastUpdated</h6>
-        <input type="string" v-model="Movies.lastupdated" />
+      <div class="dialog my-2">
+        <div class="inputField">
+          <span class="p-float-label">
+            <VChips
+              v-model="Movies.countries"
+              id="Countries"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Countries">Countries</label>
+          </span>
+          <span class="p-float-label">
+            <VChips
+              v-model="Movies.directors"
+              id="Directors"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Directors">Directors</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.fullplot" id="Fullplot" />
+            <label for="Fullplot">Fullplot</label>
+          </span>
+          <span class="p-float-label">
+            <VChips
+              v-model="Movies.genres"
+              id="Genres"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Genres">Genres</label>
+          </span>
+        </div>
+
+        <div class="inputField">
+          <span class="p-float-label">
+            <VChips
+              v-model="Movies.languages"
+              id="Languages"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Languages">Languages</label>
+          </span>
+          <span class="p-float-label">
+            <VNumber
+              v-model="Movies.metacritic"
+              id="Metacritic"
+              :useGrouping="false"
+              :minFractionDigits="1"
+              :maxFractionDigits="1"
+              :min="0.0"
+              :max="10.0"
+            />
+            <label for="Metacritic">Metacritic</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.plot" id="Plot" />
+            <label for="Plot">Plot</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.poster" id="Poster" />
+            <label for="Poster">Poster</label>
+          </span>
+        </div>
+
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.rated" />
+            <label for="Rated">Rated</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.released" id="Released" />
+            <label for="Released">Released</label>
+          </span>
+          <span class="p-float-label">
+            <VNumber
+              v-model="Movies.runtime"
+              id="Runtime"
+              :useGrouping="false"
+            />
+            <label for="Runtime">Runtime</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.title" id="Title" />
+            <label for="Title">Title</label>
+          </span>
+        </div>
+
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.type" id="Type" />
+            <label for="Type">Type</label>
+          </span>
+          <span class="p-float-label">
+            <VChips
+              v-model="Movies.writers"
+              id="Writers"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Writers">Writers</label>
+          </span>
+          <span class="p-float-label">
+            <VNumber
+              v-model="Movies.year"
+              id="Year"
+              :useGrouping="false"
+            />
+            <label for="Year">Year</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="string"
+              v-model="Movies.lastupdated"
+              id="LastUpdated"
+            />
+            <label for="LastUpdated">LastUpdated</label>
+          </span>
+        </div>
+
+        <div class="inputField">
+          <VAccordion>
+            <VAccordionTab header="Awards">
+              <VNumber
+                v-model="Movies.awards.nominations"
+                :useGrouping="false"
+                placeholder="nominations"
+                class="mb-2"
+              />
+              <VInput
+                type="text"
+                v-model="Movies.awards.text"
+                placeholder="text"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.awards.wins"
+                :useGrouping="false"
+                placeholder="wins"
+                class="mb-2"
+              />
+            </VAccordionTab>
+          </VAccordion>
+          <VAccordion>
+            <VAccordionTab header="Tomatoes">
+              <VInput
+                type="text"
+                v-model="Movies.tomatoes.boxOffice"
+                placeholder="boxOffice"
+                class="mb-2"
+              />
+              <VInput
+                type="text"
+                v-model="Movies.tomatoes.consensus"
+                placeholder="consensus"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.critic.meter"
+                :useGrouping="false"
+                placeholder="critic meter"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.critic.numReviews"
+                :useGrouping="false"
+                placeholder="critic numRevies"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.critic.rating"
+                :useGrouping="false"
+                placeholder="critic rating"
+                class="mb-2"
+              />
+              <VInput
+                v-model="Movies.tomatoes.dvd"
+                :useGrouping="false"
+                placeholder="dvd"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.fresh"
+                :useGrouping="false"
+                placeholder="fresh"
+                class="mb-2"
+              />
+              <VInput
+                v-model="Movies.tomatoes.lastUpdated"
+                :useGrouping="false"
+                placeholder="lastUpdated"
+                class="mb-2"
+              />
+              <VInput
+                type="text"
+                v-model="Movies.tomatoes.production"
+                placeholder="production"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.rotten"
+                :useGrouping="false"
+                placeholder="rotten"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.viewer.meter"
+                :useGrouping="false"
+                placeholder="viewer meter"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.viewer.numReviews"
+                :useGrouping="false"
+                placeholder="viewer numRevies"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.tomatoes.viewer.rating"
+                :useGrouping="false"
+                placeholder="viewer rating"
+                class="mb-2"
+              />
+              <VInput
+                type="text"
+                v-model="Movies.tomatoes.website"
+                placeholder="website"
+                class="mb-2"
+              />
+            </VAccordionTab>
+          </VAccordion>
+          <VAccordion>
+            <VAccordionTab header="IMDB">
+              <VNumber
+                v-model="Movies.imdb.id"
+                :useGrouping="false"
+                placeholder="id"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.imdb.rating"
+                :useGrouping="false"
+                placeholder="rating"
+                class="mb-2"
+              />
+              <VNumber
+                v-model="Movies.imdb.votes"
+                :useGrouping="false"
+                placeholder="votes"
+                class="mb-2"
+              />
+            </VAccordionTab>
+          </VAccordion>
+        </div>
       </div>
       <template #footer>
         <VButton
@@ -320,24 +700,51 @@ export default {
       movieName: "",
       updateMessage: "Nenhum filme selecionado",
       Movies: {
-        awards: "",
-        countries: "",
-        directors: "",
-        fullolot: "",
+        awards: {
+          nominations: undefined,
+          text: "",
+          wins: undefined,
+        },
+        countries: [],
+        directors: [],
+        fullplot: "",
         genres: [],
-        imdb: "",
-        Languages: "",
-        metacritic: "",
+        imdb: {
+          id: undefined,
+          rating: undefined,
+          votes: undefined,
+        },
+        languages: [],
+        metacritic: undefined,
         plot: "",
         poster: "",
         rated: "",
         released: "",
-        runtime: "",
+        runtime: undefined,
         title: "",
-        tomatoes: "",
+        tomatoes: {
+          boxOffice: "",
+          consensus: "",
+          critic: {
+            meter: undefined,
+            numReviwes: undefined,
+            rating: undefined,
+          },
+          dvd: "",
+          fresh: undefined,
+          lastUpdated: "",
+          production: "",
+          rotten: undefined,
+          viewer: {
+            meter: undefined,
+            numReviews: undefined,
+            rating: undefined,
+          },
+          website: "",
+        },
         type: "",
-        writers: "",
-        year: "",
+        writers: [],
+        year: undefined,
         lastupdated: "",
       },
     };
@@ -345,14 +752,17 @@ export default {
 };
 </script>
 <style scoped>
-.dialog{
+.dialog {
   display: flex;
   gap: 1rem;
 }
-.inputField{
+.inputField {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-
+  width: 25%;
+}
+.arrayInput {
+  width: 15rem;
 }
 </style>
