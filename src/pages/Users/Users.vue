@@ -1,11 +1,15 @@
 <template>
   <div class="card">
     <VConfirmDialog> </VConfirmDialog>
-    <VDialog header="Limitar Lista" :visible.sync="display">
-      <h6>Quantidade</h6>
-      <input type="text" v-model="limit" />
-      <h6>Pagina</h6>
-      <input type="text" v-model="skip" />
+     <VDialog header="Limitar Lista" :visible.sync="display">
+      <span class="p-float-label mt-2 mb-4">
+        <VNumber type="text" v-model="limit" id="Quantidade" />
+        <label for="Quantidade">Quantidade</label>
+      </span>
+      <span class="p-float-label">
+        <VNumber type="text" v-model="skip" id="Pagina" />
+        <label for="Pagina">Pagina</label>
+      </span>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -22,12 +26,20 @@
       </template>
     </VDialog>
     <VDialog header="Criar Usuario" :visible.sync="displayC">
-      <h6>Nome</h6>
-      <input type="text" v-model="Users.name" />
-      <h6>Email</h6>
-      <input type="text" v-model="Users.email" />
-      <h6>Senha</h6>
-      <input type="text" v-model="Users.password" />
+      <div class="dialog mt-2">
+        <span class="p-float-label">
+          <VInput type="text" v-model="Users.name" id="name" />
+          <label for="name">name</label>
+        </span>
+        <span class="p-float-label">
+          <VInput type="text" v-model="Users.email" id="email" />
+          <label for="email">email</label>
+        </span>
+        <span class="p-float-label">
+          <VInput type="text" v-model="Users.password" id="password" />
+          <label for="password">password</label>
+        </span>
+      </div>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -42,14 +54,22 @@
           @click="createUser"
         />
       </template>
-    </VDialog>
+    </VDialog >
     <VDialog :header="updateMessage" :visible.sync="displayU">
-      <h6>Nome</h6>
-      <input type="text" v-model="Users.name" />
-      <h6>Email</h6>
-      <input type="text" v-model="Users.email" />
-      <h6>Senha</h6>
-      <input type="text" v-model="Users.password" />
+      <div class="dialog mt-2">
+        <span class="p-float-label">
+          <VInput type="text" v-model="Users.name" id="name" />
+          <label for="name">name</label>
+        </span>
+        <span class="p-float-label">
+          <VInput type="text" v-model="Users.email" id="email" />
+          <label for="email">email</label>
+        </span>
+        <span class="p-float-label">
+          <VInput type="text" v-model="Users.password" id="password" />
+          <label for="password">password</label>
+        </span>
+      </div>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -188,8 +208,8 @@ export default {
       jwt: localStorage.getItem("token"),
       UserName: "",
       updateMessage: "Nenhum usuario selecionado",
-      limit: "",
-      skip: "",
+      limit: undefined,
+      skip: undefined,
       id: "",
       Users: {
         name: "",
@@ -201,5 +221,13 @@ export default {
 };
 </script>
 <style scoped>
+.dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+}
 </style>
 

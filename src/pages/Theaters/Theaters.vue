@@ -2,10 +2,14 @@
   <div class="card">
     <VConfirmDialog> </VConfirmDialog>
     <VDialog header="Limitar Lista" :visible.sync="display">
-      <h6>Quantidade</h6>
-      <input type="text" v-model="limit" />
-      <h6>Pagina</h6>
-      <input type="text" v-model="skip" />
+      <span class="p-float-label mt-2 mb-4">
+        <VNumber type="text" v-model="limit" id="Quantidade" />
+        <label for="Quantidade">Quantidade</label>
+      </span>
+      <span class="p-float-label">
+        <VNumber type="text" v-model="skip" id="Pagina" />
+        <label for="Pagina">Pagina</label>
+      </span>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -22,25 +26,78 @@
       </template>
     </VDialog>
     <VDialog header="Criar Teatro" :visible.sync="displayC">
-      <div class="dialog">
-        <h6>TheaterId</h6>
-        <input type="text" v-model="Theaters.theaterId" />
-        <h6>Street1</h6>
-        <input type="text" v-model="Theaters.location.address.street1" />
-        <h6>Street2</h6>
-        <input type="text" v-model="Theaters.location.address.street2" />
-        <h6>Zipcode</h6>
-        <input type="text" v-model="Theaters.location.address.zipcode" />
-        <h6>State</h6>
-        <input type="text" v-model="Theaters.location.address.state" />
-        <h6>City</h6>
-        <input type="text" v-model="Theaters.location.address.city" />
-        <h6>Type</h6>
-        <input type="text" v-model="Theaters.location.geo.type" />
-        <h6>Latitude</h6>
-        <input type="text" v-model="Theaters.location.geo.coordinates[0]" />
-        <h6>Longitude</h6>
-        <input type="text" v-model="Theaters.location.geo.coordinates[1]" />
+      <div class="dialog mt-3">
+        <div class="inputField">
+          <span class="p-float-label">
+            <VNumber type="text" v-model="Theaters.theaterId" id="TheaterId" :useGrouping="false" />
+            <label for="TheaterId">TheaterId</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.street1"
+              id="street1"
+            />
+            <label for="street1">street1</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.street2"
+            />
+            <label for="street2">street2</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput
+            type="text"
+            v-model="Theaters.location.address.zipcode"
+            id="zipcode"
+          />
+            <label for="zipcode">zipcode</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+            type="text"
+            v-model="Theaters.location.address.state"
+            id="state"
+          />
+            <label for="state">state</label>
+          </span>
+           <span class="p-float-label">
+            <VInput
+            type="text"
+            v-model="Theaters.location.address.city"
+            id="city"
+          />
+            <label for="city">city</label>
+          </span>
+        </div>
+        <div class="inputField">
+            <span class="p-float-label">
+             <VInput
+            type="text"
+            v-model="Theaters.location.geo.type"
+            id="type"
+          />
+            <label for="type">type</label>
+          </span>
+           <span class="p-float-label">
+             <VInput
+            v-model="Theaters.location.geo.coordinates[0]"
+            id="latitude"
+          />
+            <label for="latitude">latitude</label>
+          </span>
+           <span class="p-float-label">
+            <VInput
+            v-model="Theaters.location.geo.coordinates[1]"
+            id="longitude"
+          />
+            <label for="longitude">longitude</label>
+          </span>
+        </div>
       </div>
       <template #footer>
         <VButton
@@ -58,25 +115,78 @@
       </template>
     </VDialog>
     <VDialog :header="updateMessage" :visible.sync="displayU">
-      <div class="dialog">
-        <h6>TheaterId</h6>
-        <input type="text" v-model="Theaters.location.address.theaterId" />
-        <h6>Street1</h6>
-        <input type="text" v-model="Theaters.location.address.street1" />
-        <h6>Street2</h6>
-        <input type="text" v-model="Theaters.location.address.street2" />
-        <h6>Zipcode</h6>
-        <input type="text" v-model="Theaters.location.address.zipcode" />
-        <h6>State</h6>
-        <input type="text" v-model="Theaters.location.address.state" />
-        <h6>City</h6>
-        <input type="text" v-model="Theaters.location.address.city" />
-        <h6>Type</h6>
-        <input type="text" v-model="Theaters.location.geo.type" />
-        <h6>Latitude</h6>
-        <input type="text" v-model="Theaters.location.geo.coordinates[0]" />
-        <h6>Longitude</h6>
-        <input type="text" v-model="Theaters.location.geo.coordinates[1]" />
+     <div class="dialog mt-3">
+        <div class="inputField">
+          <span class="p-float-label">
+            <VNumber type="text" v-model="Theaters.theaterId" id="TheaterId" :useGrouping="false" />
+            <label for="TheaterId">TheaterId</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.street1"
+              id="street1"
+            />
+            <label for="street1">street1</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.street2"
+            />
+            <label for="street2">street2</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput
+            type="text"
+            v-model="Theaters.location.address.zipcode"
+            id="zipcode"
+          />
+            <label for="zipcode">zipcode</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+            type="text"
+            v-model="Theaters.location.address.state"
+            id="state"
+          />
+            <label for="state">state</label>
+          </span>
+           <span class="p-float-label">
+            <VInput
+            type="text"
+            v-model="Theaters.location.address.city"
+            id="city"
+          />
+            <label for="city">city</label>
+          </span>
+        </div>
+        <div class="inputField">
+            <span class="p-float-label">
+             <VInput
+            type="text"
+            v-model="Theaters.location.geo.type"
+            id="type"
+          />
+            <label for="type">type</label>
+          </span>
+           <span class="p-float-label">
+             <VInput
+            v-model="Theaters.location.geo.coordinates[0]"
+            id="latitude"
+          />
+            <label for="latitude">latitude</label>
+          </span>
+           <span class="p-float-label">
+            <VInput
+            v-model="Theaters.location.geo.coordinates[1]"
+            id="longitude"
+          />
+            <label for="longitude">longitude</label>
+          </span>
+        </div>
       </div>
       <template #footer>
         <VButton
@@ -235,11 +345,11 @@ export default {
       jwt: localStorage.getItem("token"),
       TheaterName: "",
       updateMessage: "Nenhum teatro selecionado",
-      limit: "",
-      skip: "",
+      limit: undefined,
+      skip: undefined,
       id: "",
       Theaters: {
-        theaterId: "",
+        theaterId: undefined,
         location: {
           address: {
             street1: "",
@@ -260,6 +370,12 @@ export default {
 </script>
 <style scoped>
 .dialog {
-  column-count: 3;
+  display: flex;
+  gap: 0.8rem;
+}
+.inputField{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 </style>

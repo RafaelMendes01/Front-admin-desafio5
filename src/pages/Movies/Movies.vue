@@ -2,10 +2,14 @@
   <div class="card">
     <VConfirmDialog> </VConfirmDialog>
     <VDialog header="Limitar Lista" :visible.sync="display">
-      <h6>Quantidade</h6>
-      <input type="text" v-model="limit" />
-      <h6>Pagina</h6>
-      <input type="text" v-model="skip" />
+      <span class="p-float-label mt-2 mb-4">
+        <VNumber type="text" v-model="limit" id="Quantidade"/>
+        <label for="Quantidade">Quantidade</label>
+      </span>
+        <span class="p-float-label">
+        <VNumber type="text" v-model="skip" id="Pagina"/>
+        <label for="Pagina">Pagina</label>
+      </span>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -127,11 +131,7 @@
             <label for="Writers">Writers</label>
           </span>
           <span class="p-float-label">
-            <VNumber
-              v-model="Movies.year"
-              id="Year"
-              :useGrouping="false"
-            />
+            <VNumber v-model="Movies.year" id="Year" :useGrouping="false" />
             <label for="Year">Year</label>
           </span>
           <span class="p-float-label">
@@ -400,11 +400,7 @@
             <label for="Writers">Writers</label>
           </span>
           <span class="p-float-label">
-            <VNumber
-              v-model="Movies.year"
-              id="Year"
-              :useGrouping="false"
-            />
+            <VNumber v-model="Movies.year" id="Year" :useGrouping="false" />
             <label for="Year">Year</label>
           </span>
           <span class="p-float-label">
@@ -694,8 +690,8 @@ export default {
       displayC: false,
       displayU: false,
       jwt: localStorage.getItem("token"),
-      limit: "",
-      skip: "",
+      limit: undefined,
+      skip: undefined,
       id: "",
       movieName: "",
       updateMessage: "Nenhum filme selecionado",
