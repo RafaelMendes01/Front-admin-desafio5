@@ -44,6 +44,9 @@ export default{
        async submit () {
         this.$store.dispatch('Login', this.user)
         }
+    },
+    created(){
+        localStorage.clear();
     }
 }
 </script>

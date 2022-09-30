@@ -14,6 +14,8 @@ export default new vuex.Store({
         Users: [],
         Comments: [],
         Sessions: [],
+        errorMessage: "",
+        successMessage: ""
     },
     mutations: {
         'Login'(state, userData) {
@@ -35,7 +37,18 @@ export default new vuex.Store({
         },
         'GET_SESSIONS'(state, Sessions) {
             state.Sessions = Sessions
-        }
+        },
+        setErrorMessage(state, payload) {
+            state.errorMessage = payload;
+        },
+        setSuccessMessage(state, payload) {
+            state.successMessage = payload;
+        },
+
+    },
+    getters: {
+        getErrorMessage: (state) => state.errorMessage,
+        getSuccessMessage: (state) => state.successMessage,
     },
     actions: {
         async Login({ commit }, data) {
@@ -46,31 +59,56 @@ export default new vuex.Store({
                         data
                     };
                     commit('Login', userData);
-                    window.location.replace('/#/dashboard')
+                    localStorage.setItem('token', userData.jwt )
+                    window.location.replace('/#/admin/Movies')
                 })
-                .catch(error => console.log(error))
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
         },
         async getMovies({ commit }, token) {
             await Requests.getMovies({ headers: { Authorization: token } })
                 .then(res => {
                     commit('GET_MOVIES', res.data)
                 })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
+        async getMoviesPaginate({ commit }, data) {
+            await Requests.getMoviesPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
+                .then(res => {
+                    commit('GET_MOVIES', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
         },
         async deleteMovies({ commit }, data) {
-            console.log(data)
             await Requests.DeleteMovies({ headers: { Authorization: data.jwt } }, data.id)
                 .then(res => {
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async createMovies({ commit }, data) {
-            console.log(data.Movies)
             await Requests.CreateMovies({ headers: { Authorization: data.jwt } }, data.Movies)
                 .then(res => {
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async updateMovies({ commit }, data) {
             await Requests.UpdateMovies({ headers: { Authorization: data.jwt } }, data.id, data.Movies)
                 .then(res => {
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async getUsers({ commit }, token) {
@@ -78,20 +116,45 @@ export default new vuex.Store({
                 .then(res => {
                     commit('GET_USERS', res.data)
                 })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
+        async getUsersPaginate({ commit }, data) {
+            console.log(data)
+            await Requests.getUsersPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
+                .then(res => {
+                    commit('GET_USERS', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
         },
         async deleteUsers({ commit }, data) {
             await Requests.DeleteUsers({ headers: { Authorization: data.jwt } }, data.id)
                 .then(res => {
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async createUsers({ commit }, data) {
             await Requests.CreateUsers(data)
                 .then(res => {
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async updateUsers({ commit }, data) {
             await Requests.UpdateUsers({ headers: { Authorization: data.jwt } }, data.id, data.Users)
                 .then(res => {
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async getTheaters({ commit }, token) {
@@ -99,21 +162,45 @@ export default new vuex.Store({
                 .then(res => {
                     commit('GET_THEATERS', res.data)
                 })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
+        async getTheatersPaginate({ commit }, data) {
+            console.log(data)
+            await Requests.getTheatersPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
+                .then(res => {
+                    commit('GET_THEATERS', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
         },
         async deleteTheaters({ commit }, data) {
             await Requests.DeleteTheaters({ headers: { Authorization: data.jwt } }, data.id)
                 .then(res => {
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async createTheaters({ commit }, data) {
             await Requests.CreateTheaters({ headers: { Authorization: data.jwt } }, data.Theaters)
                 .then(res => {
-
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async updateTheaters({ commit }, data) {
             await Requests.UpdateTheaters({ headers: { Authorization: data.jwt } }, data.id, data.Theaters)
                 .then(res => {
+                    commit("setSuccessMessage", res.status);
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
                 })
         },
         async getComments({ commit }, token) {
@@ -121,13 +208,37 @@ export default new vuex.Store({
                 .then(res => {
                     commit('GET_COMMENTS', res.data)
                 })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
         },
         async getSessions({ commit }, token) {
             await Requests.getSessions({ headers: { Authorization: token } })
                 .then(res => {
                     commit('GET_SESSIONS', res.data)
                 })
-        }
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
+        async getCommentsPaginate({ commit }, data) {
+            await Requests.getCommentsPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
+                .then(res => {
+                    commit('GET_COMMENTS', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
+        async getSessionsPaginate({ commit }, data) {
+            await Requests.getSessionsPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
+                .then(res => {
+                    commit('GET_SESSIONS', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
 
     },
 })

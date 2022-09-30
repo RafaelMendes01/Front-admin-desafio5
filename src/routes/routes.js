@@ -17,6 +17,16 @@ import Movies from 'src/pages/Movies/Movies.vue'
 import Users from 'src/pages/Users/Users.vue'
 import Theaters from 'src/pages/Theaters/Theaters.vue'
 import Report from 'src/pages/Report/Report.vue'
+import SessionsTable from 'src/pages/Report/SessionsList.vue'
+import CommentsTable from 'src/pages/Report/CommentsList.vue'
+
+const authGuard = () => (to,from,next) => {
+  if (localStorage.getItem("token") || "") {
+    next();
+  } else {
+    next("/");
+  }
+};
 
 const routes = [
   {
@@ -26,73 +36,101 @@ const routes = [
   {
     path: '/dashboard',
     component: DashBoard,
+    beforeEnter: authGuard(),
   },
+  {
+    path: '/admin',
+    component: DashboardLayout,
+    beforeEnter: authGuard(),
+    children: [
       {
-        path: '/admin',
-        component: DashboardLayout,
+        path: 'Movies',
+        name: 'Movies',
+        component: Movies,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'Users',
+        name: 'Users',
+        component: Users,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'Theaters',
+        name: 'Theaters',
+        component: Theaters,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'Report',
+        name: 'Report',
+        component: Report,
+        beforeEnter: authGuard(),
         children: [
           {
-            path: 'Movies',
-            name: 'Movies',
-            component: Movies
-          },
-					{
-            path: 'Users',
-            name: 'Users',
-            component: Users
-          },
-					{
-            path: 'Theaters',
-            name: 'Theaters',
-            component: Theaters
+            path: 'SessionsTable',
+            name: 'SessionsTable',
+            component: SessionsTable,
+            beforeEnter: authGuard(),
           },
           {
-            path: 'Report',
-            name: 'Report',
-            component: Report
-          },
-          {
-            path: 'overview',
-            name: 'Overview',
-            component: Overview
-          },
-          {
-            path: 'user',
-            name: 'User',
-            component: UserProfile
-          },
-          {
-            path: 'table-list',
-            name: 'Table List',
-            component: TableList
-          },
-          {
-            path: 'typography',
-            name: 'Typography',
-            component: Typography
-          },
-          {
-            path: 'icons',
-            name: 'Icons',
-            component: Icons
-          },
-          {
-            path: 'maps',
-            name: 'Maps',
-            component: Maps
-          },
-          {
-            path: 'notifications',
-            name: 'Notifications',
-            component: Notifications
-          },
-          {
-            path: 'upgrade',
-            name: 'Upgrade to PRO',
-            component: Upgrade
+            path: 'CommentsTable',
+            name: 'CommentsTable',
+            component: CommentsTable,
+            beforeEnter: authGuard(),
           }
         ]
       },
+      {
+        path: 'overview',
+        name: 'Overview',
+        component: Overview,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: UserProfile,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'table-list',
+        name: 'Table List',
+        component: TableList,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'typography',
+        name: 'Typography',
+        component: Typography,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'icons',
+        name: 'Icons',
+        component: Icons,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'maps',
+        name: 'Maps',
+        component: Maps,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'notifications',
+        name: 'Notifications',
+        component: Notifications,
+        beforeEnter: authGuard(),
+      },
+      {
+        path: 'upgrade',
+        name: 'Upgrade to PRO',
+        component: Upgrade,
+        beforeEnter: authGuard(),
+      }
+    ]
+  },
   { path: '*', component: NotFound }
 ]
 
