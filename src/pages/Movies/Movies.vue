@@ -28,27 +28,28 @@
     <VDialog header="Criar Filme" :visible.sync="displayC" class="createDialog">
       <div class="dialog my-2">
         <div class="inputField">
-          <span class="p-float-label">
-            <VChips
-              v-model="Movies.countries"
-              id="Countries"
-              :allowDuplicate="false"
-              class="arrayInput"
-            />
-            <label for="Countries">Countries</label>
+           <span class="p-float-label">
+            <VInput type="text" v-model="Movies.title" id="Title" />
+            <label for="Title">Title</label>
           </span>
-          <span class="p-float-label">
-            <VChips
-              v-model="Movies.directors"
-              id="Directors"
-              :allowDuplicate="false"
-              class="arrayInput"
-            />
-            <label for="Directors">Directors</label>
-          </span>
-          <span class="p-float-label">
+           <span class="p-float-label">
             <VInput type="text" v-model="Movies.fullplot" id="Fullplot" />
             <label for="Fullplot">Fullplot</label>
+          </span>
+            <span class="p-float-label">
+            <VInput type="text" v-model="Movies.plot" id="Plot" />
+            <label for="Plot">Plot</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.poster" id="Poster" />
+            <label for="Poster">Poster</label>
+          </span>
+        </div>
+
+        <div class="inputField">
+            <span class="p-float-label">
+            <VInput type="text" v-model="Movies.type" id="Type" />
+            <label for="Type">Type</label>
           </span>
           <span class="p-float-label">
             <VChips
@@ -59,10 +60,49 @@
             />
             <label for="Genres">Genres</label>
           </span>
+           <span class="p-float-label">
+            <VNumber
+              v-model="Movies.runtime"
+              id="Runtime"
+              :useGrouping="false"
+            />
+            <label for="Runtime">Runtime</label>
+          </span>
+          <span class="p-float-label">
+            <VNumber v-model="Movies.year" id="Year" :useGrouping="false" />
+            <label for="Year">Year</label>
+          </span>
         </div>
 
         <div class="inputField">
-          <span class="p-float-label">
+            <span class="p-float-label">
+            <VChips
+              v-model="Movies.directors"
+              id="Directors"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Directors">Directors</label>
+          </span>
+            <span class="p-float-label">
+            <VChips
+              v-model="Movies.writers"
+              id="Writers"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Writers">Writers</label>
+          </span>
+              <span class="p-float-label">
+            <VChips
+              v-model="Movies.countries"
+              id="Countries"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Countries">Countries</label>
+          </span>
+            <span class="p-float-label">
             <VChips
               v-model="Movies.languages"
               id="Languages"
@@ -71,7 +111,14 @@
             />
             <label for="Languages">Languages</label>
           </span>
-          <span class="p-float-label">
+        </div>
+
+        <div class="inputField">
+           <span class="p-float-label">
+            <VInput type="text" v-model="Movies.rated" />
+            <label for="Rated">Rated</label>
+          </span>
+             <span class="p-float-label">
             <VNumber
               v-model="Movies.metacritic"
               id="Metacritic"
@@ -83,58 +130,11 @@
             />
             <label for="Metacritic">Metacritic</label>
           </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.plot" id="Plot" />
-            <label for="Plot">Plot</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.poster" id="Poster" />
-            <label for="Poster">Poster</label>
-          </span>
-        </div>
-
-        <div class="inputField">
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.rated" />
-            <label for="Rated">Rated</label>
-          </span>
-          <span class="p-float-label">
+           <span class="p-float-label">
             <VInput type="text" v-model="Movies.released" id="Released" />
             <label for="Released">Released</label>
           </span>
-          <span class="p-float-label">
-            <VNumber
-              v-model="Movies.runtime"
-              id="Runtime"
-              :useGrouping="false"
-            />
-            <label for="Runtime">Runtime</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.title" id="Title" />
-            <label for="Title">Title</label>
-          </span>
-        </div>
-
-        <div class="inputField">
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.type" id="Type" />
-            <label for="Type">Type</label>
-          </span>
-          <span class="p-float-label">
-            <VChips
-              v-model="Movies.writers"
-              id="Writers"
-              :allowDuplicate="false"
-              class="arrayInput"
-            />
-            <label for="Writers">Writers</label>
-          </span>
-          <span class="p-float-label">
-            <VNumber v-model="Movies.year" id="Year" :useGrouping="false" />
-            <label for="Year">Year</label>
-          </span>
-          <span class="p-float-label">
+           <span class="p-float-label">
             <VInput
               type="string"
               v-model="Movies.lastupdated"
@@ -297,27 +297,28 @@
     <VDialog :header="updateMessage" :visible.sync="displayU">
       <div class="dialog my-2">
         <div class="inputField">
-          <span class="p-float-label">
-            <VChips
-              v-model="Movies.countries"
-              id="Countries"
-              :allowDuplicate="false"
-              class="arrayInput"
-            />
-            <label for="Countries">Countries</label>
+           <span class="p-float-label">
+            <VInput type="text" v-model="Movies.title" id="Title" />
+            <label for="Title">Title</label>
           </span>
-          <span class="p-float-label">
-            <VChips
-              v-model="Movies.directors"
-              id="Directors"
-              :allowDuplicate="false"
-              class="arrayInput"
-            />
-            <label for="Directors">Directors</label>
-          </span>
-          <span class="p-float-label">
+           <span class="p-float-label">
             <VInput type="text" v-model="Movies.fullplot" id="Fullplot" />
             <label for="Fullplot">Fullplot</label>
+          </span>
+            <span class="p-float-label">
+            <VInput type="text" v-model="Movies.plot" id="Plot" />
+            <label for="Plot">Plot</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Movies.poster" id="Poster" />
+            <label for="Poster">Poster</label>
+          </span>
+        </div>
+
+        <div class="inputField">
+            <span class="p-float-label">
+            <VInput type="text" v-model="Movies.type" id="Type" />
+            <label for="Type">Type</label>
           </span>
           <span class="p-float-label">
             <VChips
@@ -328,10 +329,49 @@
             />
             <label for="Genres">Genres</label>
           </span>
+           <span class="p-float-label">
+            <VNumber
+              v-model="Movies.runtime"
+              id="Runtime"
+              :useGrouping="false"
+            />
+            <label for="Runtime">Runtime</label>
+          </span>
+          <span class="p-float-label">
+            <VNumber v-model="Movies.year" id="Year" :useGrouping="false" />
+            <label for="Year">Year</label>
+          </span>
         </div>
 
         <div class="inputField">
-          <span class="p-float-label">
+            <span class="p-float-label">
+            <VChips
+              v-model="Movies.directors"
+              id="Directors"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Directors">Directors</label>
+          </span>
+            <span class="p-float-label">
+            <VChips
+              v-model="Movies.writers"
+              id="Writers"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Writers">Writers</label>
+          </span>
+              <span class="p-float-label">
+            <VChips
+              v-model="Movies.countries"
+              id="Countries"
+              :allowDuplicate="false"
+              class="arrayInput"
+            />
+            <label for="Countries">Countries</label>
+          </span>
+            <span class="p-float-label">
             <VChips
               v-model="Movies.languages"
               id="Languages"
@@ -340,7 +380,14 @@
             />
             <label for="Languages">Languages</label>
           </span>
-          <span class="p-float-label">
+        </div>
+
+        <div class="inputField">
+           <span class="p-float-label">
+            <VInput type="text" v-model="Movies.rated" />
+            <label for="Rated">Rated</label>
+          </span>
+             <span class="p-float-label">
             <VNumber
               v-model="Movies.metacritic"
               id="Metacritic"
@@ -352,58 +399,11 @@
             />
             <label for="Metacritic">Metacritic</label>
           </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.plot" id="Plot" />
-            <label for="Plot">Plot</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.poster" id="Poster" />
-            <label for="Poster">Poster</label>
-          </span>
-        </div>
-
-        <div class="inputField">
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.rated" />
-            <label for="Rated">Rated</label>
-          </span>
-          <span class="p-float-label">
+           <span class="p-float-label">
             <VInput type="text" v-model="Movies.released" id="Released" />
             <label for="Released">Released</label>
           </span>
-          <span class="p-float-label">
-            <VNumber
-              v-model="Movies.runtime"
-              id="Runtime"
-              :useGrouping="false"
-            />
-            <label for="Runtime">Runtime</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.title" id="Title" />
-            <label for="Title">Title</label>
-          </span>
-        </div>
-
-        <div class="inputField">
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.type" id="Type" />
-            <label for="Type">Type</label>
-          </span>
-          <span class="p-float-label">
-            <VChips
-              v-model="Movies.writers"
-              id="Writers"
-              :allowDuplicate="false"
-              class="arrayInput"
-            />
-            <label for="Writers">Writers</label>
-          </span>
-          <span class="p-float-label">
-            <VNumber v-model="Movies.year" id="Year" :useGrouping="false" />
-            <label for="Year">Year</label>
-          </span>
-          <span class="p-float-label">
+           <span class="p-float-label">
             <VInput
               type="string"
               v-model="Movies.lastupdated"
