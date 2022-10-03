@@ -1,5 +1,6 @@
 <template>
   <div :class="{'nav-open': $sidebar.showSidebar}">
+     <VToast />
     <Admin />
   </div>
 </template>
@@ -9,7 +10,15 @@
   export default {
     components: {
         Admin
-    }
+    },
+  created(){
+     this.$toast.add({
+          severity: "success",
+          summary: "Usuario logado",
+          detail: "seja bem vindo a nossa aplicação",
+          life: 1500,
+        });
+  }
   }
 </script>
 <style lang="scss">

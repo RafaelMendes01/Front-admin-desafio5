@@ -52,7 +52,15 @@
           this.$sidebar.displaySidebar(false)
         }
       }
-    }
+    },
+    created(){
+     this.$toast.add({
+          severity: "info",
+          summary: "Usuario logado",
+          detail: `seja bem vindo a nossa aplicação ${this.$store.state.UserName}`,
+          life: 4000,
+        });
+  }
   }
 
 </script>
