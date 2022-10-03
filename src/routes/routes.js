@@ -4,7 +4,6 @@ import NotFound from '../pages/NotFoundPage.vue'
 
 // Admin pages
 import DashBoard from 'src/pages/Dashboard/Dashboard.vue'
-import Overview from 'src/pages/Overview.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
@@ -19,6 +18,7 @@ import Theaters from 'src/pages/Theaters/Theaters.vue'
 import Report from 'src/pages/Report/Report.vue'
 import SessionsTable from 'src/pages/Report/SessionsList.vue'
 import CommentsTable from 'src/pages/Report/CommentsList.vue'
+import Overview from 'src/pages/Overview/Overview.vue'
 
 const authGuard = () => (to,from,next) => {
   if (localStorage.getItem("token") || "") {
@@ -43,6 +43,12 @@ const routes = [
     component: DashboardLayout,
     beforeEnter: authGuard(),
     children: [
+      {
+        path: 'Overview',
+        name: 'Overview',
+        component: Overview,
+        beforeEnter: authGuard(),
+      },
       {
         path: 'Movies',
         name: 'Movies',
@@ -80,12 +86,6 @@ const routes = [
             beforeEnter: authGuard(),
           }
         ]
-      },
-      {
-        path: 'overview',
-        name: 'Overview',
-        component: Overview,
-        beforeEnter: authGuard(),
       },
       {
         path: 'user',

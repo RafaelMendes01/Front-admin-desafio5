@@ -2,6 +2,10 @@
   <div class="wrapper">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
+      <sidebar-link to="/admin/Overview">
+        <i class="nc-icon nc-chart-pie-35"></i>
+        <p>Overview</p>
+      </sidebar-link>
       <sidebar-link to="/admin/Movies">
         <i class="nc-icon nc-button-play"></i>
         <p>Filmes</p>
