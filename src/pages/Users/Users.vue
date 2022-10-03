@@ -85,7 +85,11 @@
         />
       </template>
     </VDialog>
-    <div class="mx-2 my-3">
+   <div class="header mx-2 my-3">
+        <div class="ml-2">
+           <p class="text-title mr-2">Usuarios:</p>
+        </div>
+    <div>
       <template>
         <VButton
           label="Listar Todos"
@@ -119,6 +123,7 @@
         />
       </template>
     </div>
+   </div>
     <VDataTable
       :value="this.$store.state.Users"
       :paginator="true"
@@ -126,6 +131,8 @@
       showGridlines
       selectionMode="single"
       @row-select="onRowSelect"
+      :resizableColumns="true" 
+      columnResizeMode="expand"
     >
       <VColumn field="name" header="name"></VColumn>
       <VColumn field="email" header="email"></VColumn>
@@ -228,6 +235,15 @@ export default {
   align-items: center;
   width: 100%;
   gap: 1.5rem;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.text-title{
+  font-weight: bolder;
+  font-size: 1.6rem;
+  display: inline;
 }
 </style>
 

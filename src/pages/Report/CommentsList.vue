@@ -41,6 +41,8 @@
       :paginator="true"
       :rows="15"
       showGridlines
+      :resizableColumns="true" 
+      columnResizeMode="expand"
     >
       <VColumn field="name" header="Name"></VColumn>
       <VColumn field="email" header="Email"></VColumn>

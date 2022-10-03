@@ -207,7 +207,11 @@
         />
       </template>
     </VDialog>
-    <div class="mx-2 my-3">
+    <div class="header mx-2 my-3">
+        <div class="ml-2">
+           <p class="text-title mr-2">Teatros:</p>
+        </div>
+    <div>
       <template>
         <VButton
           label="Listar Todos"
@@ -241,6 +245,7 @@
         />
       </template>
     </div>
+    </div>
     <VDataTable
       :value="this.$store.state.Theaters"
       :paginator="true"
@@ -249,6 +254,8 @@
       selectionMode="single"
       @row-select="onRowSelect"
       class="mb-5"
+      :resizableColumns="true" 
+      columnResizeMode="expand"
     >
       <VColumn field="theaterId" header="Theater-id"></VColumn>
       <VColumn field="location.address.street1" header="Street"></VColumn>
@@ -403,6 +410,15 @@ export default {
   gap: 1.5rem;
 }
 .map{
-  height: 500px;
+  height: 75vh;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.text-title{
+  font-weight: bolder;
+  font-size: 1.6rem;
+  display: inline;
 }
 </style>

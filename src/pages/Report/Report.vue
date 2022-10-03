@@ -4,7 +4,7 @@
       <div id="change-field">
         <template>
           <VButton
-            label="Trocar Tabela"
+            :label="title"
             icon="pi pi-sync"
             class="p-button-success"
             @click="changeTable"
@@ -21,9 +21,11 @@ export default {
     changeTable() {
       if (this.IsSession == false) {
         this.IsSession = true;
+        this.title = "ir para Comentarios"
         window.location.replace("/#/admin/Report/SessionsTable");
       } else if (this.IsSession == true) {
         this.IsSession = false;
+        this.title = "ir para Sessões"
         window.location.replace("/#/admin/Report/CommentsTable");
       }
     },
@@ -31,6 +33,7 @@ export default {
   data() {
     return {
       IsSession: false,
+      title: "ir para Sessões"
     };
   },
 };

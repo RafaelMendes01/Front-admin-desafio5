@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="session-container">
     <VDialog header="Limitar Lista" :visible.sync="display">
       <h6>Quantidade</h6>
       <input type="text" v-model="limit" />
@@ -23,7 +23,7 @@
     <div class="mb-3 mx-2">
          <template>
         <VButton
-          label="Listar Sessoes"
+          label="Listar Sessões"
           icon="pi pi-list"
           class="p-button-primary mr-2"
           @click="showSessionsData"
@@ -41,6 +41,8 @@
       :paginator="true"
       :rows="15"
       showGridlines
+      :resizableColumns="true" 
+      columnResizeMode="expand"
     >
       <VColumn field="user_id" header="User ID"></VColumn>
       <VColumn field="jwt" header="JWT"></VColumn>
@@ -80,6 +82,10 @@ export default {
 };
 </script>
 <style scoped>
+.session-container{
+  max-width: 100vw !important;
+   word-wrap: break-word !important;
+}
 </style>
 
 

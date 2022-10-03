@@ -563,7 +563,11 @@
         />
       </template>
     </VDialog>
-    <div class="mx-2 my-3">
+      <div class="header mx-2 my-3">
+        <div class="ml-2">
+           <p class="text-title mr-2">Filmes:</p>
+        </div>
+    <div>
       <template>
         <VButton
           label="Listar Todos"
@@ -597,6 +601,7 @@
         />
       </template>
     </div>
+      </div>
     <VDataTable
       :value="this.$store.state.Movies"
       :paginator="true"
@@ -604,6 +609,8 @@
       selectionMode="single"
       @row-select="onRowSelect"
       showGridlines
+      :resizableColumns="true" 
+      columnResizeMode="fit"
     >
       <VColumn field="title" header="Title"></VColumn>
       <VColumn field="plot" header="Plot"></VColumn>
@@ -760,5 +767,14 @@ export default {
 }
 .arrayInput {
   width: 15rem;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.text-title{
+  font-weight: bolder;
+  font-size: 1.6rem;
+  display: inline;
 }
 </style>
