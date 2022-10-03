@@ -13,6 +13,8 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
+import { LMap, LTileLayer, LCircleMarker,LTooltip } from 'vue2-leaflet';
+import 'leaflet/dist/leaflet.css';
 import InputText from 'primevue/inputtext';
 import ConfirmationService from 'primevue/confirmationservice';
 import ConfirmDialog from 'primevue/confirmdialog';
@@ -62,6 +64,10 @@ Vue.component('VNumber', InputNumber)
 Vue.component('VCalendar', Calendar)
 Vue.component('VAccordion', Accordion)
 Vue.component('VAccordionTab', AccordionTab)
+Vue.component('l-map', LMap);
+Vue.component('l-tile-layer', LTileLayer);
+Vue.component('l-circle', LCircleMarker);
+Vue.component('l-tooltip', LTooltip);
 
 // configure router
 const router = new VueRouter({

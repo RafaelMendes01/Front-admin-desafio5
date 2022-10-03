@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card mb-3">
     <VConfirmDialog> </VConfirmDialog>
     <VDialog header="Limitar Lista" :visible.sync="display">
       <span class="p-float-label mt-2 mb-4">
@@ -29,7 +29,12 @@
       <div class="dialog mt-3">
         <div class="inputField">
           <span class="p-float-label">
-            <VNumber type="text" v-model="Theaters.theaterId" id="TheaterId" :useGrouping="false" />
+            <VNumber
+              type="text"
+              v-model="Theaters.theaterId"
+              id="TheaterId"
+              :useGrouping="false"
+            />
             <label for="TheaterId">TheaterId</label>
           </span>
           <span class="p-float-label">
@@ -41,60 +46,57 @@
             <label for="street1">street1</label>
           </span>
           <span class="p-float-label">
-            <VInput
-              type="text"
-              v-model="Theaters.location.address.street2"
-            />
+            <VInput type="text" v-model="Theaters.location.address.street2" />
             <label for="street2">street2</label>
           </span>
         </div>
         <div class="inputField">
           <span class="p-float-label">
             <VInput
-            type="text"
-            v-model="Theaters.location.address.zipcode"
-            id="zipcode"
-          />
+              type="text"
+              v-model="Theaters.location.address.zipcode"
+              id="zipcode"
+            />
             <label for="zipcode">zipcode</label>
           </span>
           <span class="p-float-label">
             <VInput
-            type="text"
-            v-model="Theaters.location.address.state"
-            id="state"
-          />
+              type="text"
+              v-model="Theaters.location.address.state"
+              id="state"
+            />
             <label for="state">state</label>
           </span>
-           <span class="p-float-label">
+          <span class="p-float-label">
             <VInput
-            type="text"
-            v-model="Theaters.location.address.city"
-            id="city"
-          />
+              type="text"
+              v-model="Theaters.location.address.city"
+              id="city"
+            />
             <label for="city">city</label>
           </span>
         </div>
         <div class="inputField">
-            <span class="p-float-label">
-             <VInput
-            type="text"
-            v-model="Theaters.location.geo.type"
-            id="type"
-          />
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.geo.type"
+              id="type"
+            />
             <label for="type">type</label>
           </span>
-           <span class="p-float-label">
-             <VInput
-            v-model="Theaters.location.geo.coordinates[0]"
-            id="latitude"
-          />
+          <span class="p-float-label">
+            <VInput
+              v-model="Theaters.location.geo.coordinates[0]"
+              id="latitude"
+            />
             <label for="latitude">latitude</label>
           </span>
-           <span class="p-float-label">
+          <span class="p-float-label">
             <VInput
-            v-model="Theaters.location.geo.coordinates[1]"
-            id="longitude"
-          />
+              v-model="Theaters.location.geo.coordinates[1]"
+              id="longitude"
+            />
             <label for="longitude">longitude</label>
           </span>
         </div>
@@ -115,10 +117,15 @@
       </template>
     </VDialog>
     <VDialog :header="updateMessage" :visible.sync="displayU">
-     <div class="dialog mt-3">
+      <div class="dialog mt-3">
         <div class="inputField">
           <span class="p-float-label">
-            <VNumber type="text" v-model="Theaters.theaterId" id="TheaterId" :useGrouping="false" />
+            <VNumber
+              type="text"
+              v-model="Theaters.theaterId"
+              id="TheaterId"
+              :useGrouping="false"
+            />
             <label for="TheaterId">TheaterId</label>
           </span>
           <span class="p-float-label">
@@ -130,60 +137,57 @@
             <label for="street1">street1</label>
           </span>
           <span class="p-float-label">
-            <VInput
-              type="text"
-              v-model="Theaters.location.address.street2"
-            />
+            <VInput type="text" v-model="Theaters.location.address.street2" />
             <label for="street2">street2</label>
           </span>
         </div>
         <div class="inputField">
           <span class="p-float-label">
             <VInput
-            type="text"
-            v-model="Theaters.location.address.zipcode"
-            id="zipcode"
-          />
+              type="text"
+              v-model="Theaters.location.address.zipcode"
+              id="zipcode"
+            />
             <label for="zipcode">zipcode</label>
           </span>
           <span class="p-float-label">
             <VInput
-            type="text"
-            v-model="Theaters.location.address.state"
-            id="state"
-          />
+              type="text"
+              v-model="Theaters.location.address.state"
+              id="state"
+            />
             <label for="state">state</label>
           </span>
-           <span class="p-float-label">
+          <span class="p-float-label">
             <VInput
-            type="text"
-            v-model="Theaters.location.address.city"
-            id="city"
-          />
+              type="text"
+              v-model="Theaters.location.address.city"
+              id="city"
+            />
             <label for="city">city</label>
           </span>
         </div>
         <div class="inputField">
-            <span class="p-float-label">
-             <VInput
-            type="text"
-            v-model="Theaters.location.geo.type"
-            id="type"
-          />
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.geo.type"
+              id="type"
+            />
             <label for="type">type</label>
           </span>
-           <span class="p-float-label">
-             <VInput
-            v-model="Theaters.location.geo.coordinates[0]"
-            id="latitude"
-          />
+          <span class="p-float-label">
+            <VInput
+              v-model="Theaters.location.geo.coordinates[0]"
+              id="latitude"
+            />
             <label for="latitude">latitude</label>
           </span>
-           <span class="p-float-label">
+          <span class="p-float-label">
             <VInput
-            v-model="Theaters.location.geo.coordinates[1]"
-            id="longitude"
-          />
+              v-model="Theaters.location.geo.coordinates[1]"
+              id="longitude"
+            />
             <label for="longitude">longitude</label>
           </span>
         </div>
@@ -244,15 +248,32 @@
       showGridlines
       selectionMode="single"
       @row-select="onRowSelect"
+      class="mb-5"
     >
       <VColumn field="theaterId" header="Theater-id"></VColumn>
       <VColumn field="location.address.street1" header="Street"></VColumn>
       <VColumn field="location.address.city" header="City"></VColumn>
       <VColumn field="location.geo.coordinates" header="Coordinates"></VColumn>
     </VDataTable>
+    <l-map class="map" :zoom="2" :center="[51.505, -0.159]" :minZoom="1">>
+      <l-tile-layer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution="'&copy; <a target='_blank' href='http://osm.org/copyright'>OpenStreetMap</a> contributors'"
+      ></l-tile-layer>
+      <div v-for="Theater in this.$store.state.Theaters" :key="Theater.theaterId">
+        <l-circle
+          :lat-lng="Theater.location.geo.coordinates"
+          :radius="1"
+          :color="'red'"
+        >
+        <l-tooltip>{{Theater.location.address.city}}</l-tooltip>
+        </l-circle>
+      </div>
+    </l-map>
   </div>
 </template>
 <script>
+import { LMap, LTileLayer, LCircle } from "vue2-leaflet";
 export default {
   methods: {
     onRowSelect(event) {
@@ -364,6 +385,9 @@ export default {
           },
         },
       },
+      LMap,
+      LTileLayer,
+      LCircle,
     };
   },
 };
@@ -373,9 +397,12 @@ export default {
   display: flex;
   gap: 0.8rem;
 }
-.inputField{
+.inputField {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+.map{
+  height: 500px;
 }
 </style>
