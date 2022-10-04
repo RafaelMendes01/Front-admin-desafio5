@@ -13,8 +13,9 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        h3{
+        h3, h4{
             color: $white-bg;
+            text-align: center;
         }
         p{
             color: $white-bg;
@@ -43,5 +44,5 @@
                 border-radius: 25px;
             }
         }
-    }
+    }    
 }
