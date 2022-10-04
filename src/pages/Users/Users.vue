@@ -92,18 +92,6 @@
     <div>
       <template>
         <VButton
-          label="Listar Todos"
-          icon="pi pi-list"
-          class="p-button-primary mr-2"
-          @click="showData"
-        />
-        <VButton
-          label="Limitar Listagem"
-          icon="pi pi-sliders-h"
-          class="p-button-info mr-2"
-          @click="showPaginateDialog"
-        />
-        <VButton
           label="Criar"
           icon="pi pi-plus"
           class="p-button-success mr-2"
@@ -133,6 +121,10 @@
       @row-select="onRowSelect"
       :resizableColumns="true" 
       columnResizeMode="expand"
+      :lazy="true"
+      :totalRecords="this.$store.state.UsersCount"
+      ref="dt"
+      @page="onPage($event)"
     >
       <VColumn field="name" header="name"></VColumn>
       <VColumn field="email" header="email"></VColumn>
@@ -142,22 +134,18 @@
 <script>
 export default {
   methods: {
+    onPage(event){
+       const data = {
+        jwt: `Bearer ${this.jwt}`,
+        limit: 15,
+        skip: event.page+1,
+      };
+      this.$store.dispatch("getUsersPaginate", data);
+    },
     onRowSelect(event) {
       this.id = event.data._id;
       this.UserName = event.data.name;
       this.updateMessage = `Atualizar Usuario: ${this.UserName}`;
-    },
-    getUsersPaginate() {
-      const data = {
-        jwt: `Bearer ${this.jwt}`,
-        limit: this.limit,
-        skip: this.skip,
-      };
-      this.$store.dispatch("getUsersPaginate", data);
-      this.display = false;
-    },
-    showData() {
-      this.$store.dispatch("getUsers", `Bearer ${this.jwt}`);
     },
     showPaginateDialog() {
       this.display = true;
@@ -206,6 +194,14 @@ export default {
       this.$store.dispatch("updateUsers", data);
       this.displayU = false;
     },
+  },
+   mounted(){
+    const data = {
+        jwt: `Bearer ${this.jwt}`,
+        limit: 15,
+        skip: 1,
+      };
+      this.$store.dispatch("getUsersPaginate", data);
   },
   data() {
     return {

@@ -9,7 +9,7 @@
             </div>
             <div slot="content">
               <p class="card-category">Filmes</p>
-              <h4 class="card-title">{{this.Movies}}</h4>
+              <h4 class="card-title">{{ this.Movies }}</h4>
             </div>
             <div slot="footer">
               Quantidade de filmes carregados
@@ -24,7 +24,7 @@
             </div>
             <div slot="content">
               <p class="card-category">Teatros</p>
-              <h4 class="card-title">{{this.Theaters}}</h4>
+              <h4 class="card-title">{{ this.Theaters }}</h4>
             </div>
             <div slot="footer">
               Quantidade de teatros carregados
@@ -39,7 +39,7 @@
             </div>
             <div slot="content">
               <p class="card-category">Usuarios</p>
-              <h4 class="card-title">{{this.Users}}</h4>
+              <h4 class="card-title">{{ this.Users }}</h4>
             </div>
             <div slot="footer">
               Quantidade de usuarios carregados
@@ -54,7 +54,7 @@
             </div>
             <div slot="content">
               <p class="card-category">Comentarios</p>
-              <h4 class="card-title">{{this.Comments}}</h4>
+              <h4 class="card-title">{{ this.Comments }}</h4>
             </div>
             <div slot="footer">
              Quantidade de comentarios carregados
@@ -69,7 +69,7 @@
             </div>
             <div slot="content">
               <p class="card-category">Sessões</p>
-              <h4 class="card-title">{{this.Sessions}}</h4>
+              <h4 class="card-title">{{ this.Sessions }}</h4>
             </div>
             <div slot="footer">
              Quantidade de sessões carregadas
@@ -116,18 +116,27 @@
     },
     data(){
       return {
+        jwt: localStorage.getItem("token"),
           pieChart: {
           data: {
             labels: ['F', 'C', 'T'],
-            series: [(this.$store.state.Movies.length / 1000),(this.$store.state.Comments.length / 1000),(this.$store.state.Theaters.length / 1000)]
+            series: [(this.$store.state.MoviesCount / 1000),(this.$store.state.CommentsCount / 1000),(this.$store.state.TheatersCount / 1000)]
           }
         },
-        Movies: this.$store.state.Movies.length,
-        Theaters: this.$store.state.Theaters.length,
-        Users: this.$store.state.Users.length,
-        Comments: this.$store.state.Comments.length,
-        Sessions: this.$store.state.Sessions.length
+        Movies: this.$store.state.MoviesCount,
+        Theaters: this.$store.state.TheatersCount,
+        Users: this.$store.state.UsersCount,
+        Comments: this.$store.state.CommentsCount,
+        Sessions: this.$store.state.SessionsCount
       }
+    },
+    mounted(){
+      this.$store.dispatch("getMoviesCount", `Bearer ${this.jwt}`);
+      this.$store.dispatch("getTheatersCount", `Bearer ${this.jwt}`);
+      this.$store.dispatch("getUsersCount", `Bearer ${this.jwt}`);
+      this.$store.dispatch("getCommentsCount", `Bearer ${this.jwt}`);
+      this.$store.dispatch("getSessionsCount", `Bearer ${this.jwt}`);
+      
     },
   }
 </script>

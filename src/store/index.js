@@ -14,6 +14,11 @@ export default new vuex.Store({
         Users: [],
         Comments: [],
         Sessions: [],
+        MoviesCount: 0,
+        TheatersCount: 0,
+        UsersCount: 0,
+        CommentsCount: 0,
+        SessionsCount: 0,
         errorMessage: "",
         successMessage: ""
     },
@@ -38,6 +43,21 @@ export default new vuex.Store({
         'GET_SESSIONS'(state, Sessions) {
             state.Sessions = Sessions
         },
+        'GET_MOVIES_COUNT'(state, Movies) {
+            state.MoviesCount = Movies
+        },
+        'GET_THEATERS_COUNT'(state, Theaters) {
+            state.TheatersCount = Theaters
+        },
+        'GET_USERS_COUNT'(state, Users) {
+            state.UsersCount = Users
+        },
+        'GET_COMMENTS_COUNT'(state, Comments) {
+            state.CommentsCount = Comments
+        },
+        'GET_SESSIONS_COUNT'(state, Sessions) {
+            state.SessionsCount = Sessions
+        },
         setErrorMessage(state, payload) {
             state.errorMessage = payload;
         },
@@ -59,7 +79,7 @@ export default new vuex.Store({
                         data
                     };
                     commit('Login', userData);
-                    localStorage.setItem('token', userData.jwt )
+                    localStorage.setItem('token', userData.jwt)
                     window.location.replace('/#/admin/Overview')
                 })
                 .catch(error => {
@@ -79,6 +99,16 @@ export default new vuex.Store({
             await Requests.getMoviesPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
                 .then(res => {
                     commit('GET_MOVIES', res.data)
+                    console.log(res)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
+        async getMoviesCount({ commit }, token) {
+            await Requests.getMoviesCount({ headers: { Authorization: token } })
+                .then(res => {
+                    commit('GET_MOVIES_COUNT', res.data)
                 })
                 .catch(error => {
                     commit("setErrorMessage", error.message);
@@ -130,6 +160,15 @@ export default new vuex.Store({
                     commit("setErrorMessage", error.message);
                 })
         },
+        async getUsersCount({ commit }, token) {
+            await Requests.getUsersCount({ headers: { Authorization: token } })
+                .then(res => {
+                    commit('GET_USERS_COUNT', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
         async deleteUsers({ commit }, data) {
             await Requests.DeleteUsers({ headers: { Authorization: data.jwt } }, data.id)
                 .then(res => {
@@ -171,6 +210,15 @@ export default new vuex.Store({
             await Requests.getTheatersPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
                 .then(res => {
                     commit('GET_THEATERS', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
+        async getTheatersCount({ commit }, token) {
+            await Requests.getTheatersCount({ headers: { Authorization: token } })
+                .then(res => {
+                    commit('GET_THEATERS_COUNT', res.data)
                 })
                 .catch(error => {
                     commit("setErrorMessage", error.message);
@@ -230,10 +278,28 @@ export default new vuex.Store({
                     commit("setErrorMessage", error.message);
                 })
         },
+        async getCommentsCount({ commit }, token) {
+            await Requests.getCommentsCount({ headers: { Authorization: token } })
+                .then(res => {
+                    commit('GET_COMMENTS_COUNT', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
         async getSessionsPaginate({ commit }, data) {
             await Requests.getSessionsPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
                 .then(res => {
                     commit('GET_SESSIONS', res.data)
+                })
+                .catch(error => {
+                    commit("setErrorMessage", error.message);
+                })
+        },
+        async getSessionsCount({ commit }, token) {
+            await Requests.getSessionsCount({ headers: { Authorization: token } })
+                .then(res => {
+                    commit('GET_SESSIONS_COUNT', res.data)
                 })
                 .catch(error => {
                     commit("setErrorMessage", error.message);

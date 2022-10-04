@@ -214,18 +214,6 @@
     <div>
       <template>
         <VButton
-          label="Listar Todos"
-          icon="pi pi-list"
-          class="p-button-primary mr-2"
-          @click="showData"
-        />
-        <VButton
-          label="Limitar Listagem"
-          icon="pi pi-sliders-h"
-          class="p-button-info mr-2"
-          @click="showPaginateDialog"
-        />
-        <VButton
           label="Criar"
           icon="pi pi-plus"
           class="p-button-success mr-2"
@@ -256,6 +244,10 @@
       class="mb-5"
       :resizableColumns="true" 
       columnResizeMode="expand"
+      :lazy="true"
+      :totalRecords="this.$store.state.TheatersCount"
+      ref="dt"
+      @page="onPage($event)"
     >
       <VColumn field="theaterId" header="Theater-id"></VColumn>
       <VColumn field="location.address.street1" header="Street"></VColumn>
@@ -288,17 +280,13 @@ export default {
       this.TheaterName = event.data.theaterId;
       this.updateMessage = `Atualizar Teatro: ${this.TheaterName}`;
     },
-    showData() {
-      this.$store.dispatch("getTheaters", `Bearer ${this.jwt}`);
-    },
-    getTheatersPaginate() {
-      const data = {
+   onPage(event){
+       const data = {
         jwt: `Bearer ${this.jwt}`,
-        limit: this.limit,
-        skip: this.skip,
+        limit: 15,
+        skip: event.page+1,
       };
       this.$store.dispatch("getTheatersPaginate", data);
-      this.display = false;
     },
     showPaginateDialog() {
       this.display = true;
@@ -364,6 +352,14 @@ export default {
       this.$store.dispatch("updateTheaters", data);
       this.displayU = false;
     },
+  },
+   mounted(){
+    const data = {
+        jwt: `Bearer ${this.jwt}`,
+        limit: 15,
+        skip: 1,
+      };
+      this.$store.dispatch("getTheatersPaginate", data);
   },
   data() {
     return {

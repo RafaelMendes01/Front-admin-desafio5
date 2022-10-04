@@ -570,18 +570,6 @@
     <div>
       <template>
         <VButton
-          label="Listar Todos"
-          icon="pi pi-list"
-          class="p-button-primary mr-2"
-          @click="showData"
-        />
-        <VButton
-          label="Limitar Listagem"
-          icon="pi pi-sliders-h"
-          class="p-button-info mr-2"
-          @click="showPaginateDialog"
-        />
-        <VButton
           label="Criar"
           icon="pi pi-plus"
           class="p-button-success mr-2"
@@ -611,6 +599,10 @@
       showGridlines
       :resizableColumns="true" 
       columnResizeMode="fit"
+      :lazy="true"
+      :totalRecords="this.$store.state.MoviesCount"
+      ref="dt"
+      @page="onPage($event)"
     >
       <VColumn field="title" header="Title"></VColumn>
       <VColumn field="plot" header="Plot"></VColumn>
@@ -622,22 +614,18 @@
 <script>
 export default {
   methods: {
+    onPage(event){
+       const data = {
+        jwt: `Bearer ${this.jwt}`,
+        limit: 15,
+        skip: event.page+1,
+      };
+      this.$store.dispatch("getMoviesPaginate", data);
+    },
     onRowSelect(event) {
       this.id = event.data._id;
       this.movieName = event.data.title;
       this.updateMessage = `Atualizar Filme: ${this.movieName}`;
-    },
-    getMoviesPaginate() {
-      const data = {
-        jwt: `Bearer ${this.jwt}`,
-        limit: this.limit,
-        skip: this.skip,
-      };
-      this.$store.dispatch("getMoviesPaginate", data);
-      this.display = false;
-    },
-    showData() {
-      this.$store.dispatch("getMovies", `Bearer ${this.jwt}`);
     },
     showPaginateDialog() {
       this.display = true;
@@ -690,6 +678,14 @@ export default {
       this.$store.dispatch("updateMovies", data);
       this.displayU = false;
     },
+  },
+  mounted(){
+    const data = {
+        jwt: `Bearer ${this.jwt}`,
+        limit: 15,
+        skip: 1,
+      };
+      this.$store.dispatch("getMoviesPaginate", data);
   },
   data() {
     return {
