@@ -15,6 +15,7 @@
  */
 import { LMap, LTileLayer, LCircleMarker,LTooltip } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
+import Calendar from 'primevue/calendar';
 import InputText from 'primevue/inputtext';
 import ConfirmationService from 'primevue/confirmationservice';
 import ConfirmDialog from 'primevue/confirmdialog';
@@ -34,7 +35,6 @@ import 'primeicons/primeicons.css'
 import ToastService from 'primevue/toastservice';
 import Toast from 'primevue/toast';
 import InputNumber from 'primevue/inputnumber';
-import Calendar from 'primevue/calendar';
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
 
@@ -64,6 +64,7 @@ Vue.component('VNumber', InputNumber)
 Vue.component('VCalendar', Calendar)
 Vue.component('VAccordion', Accordion)
 Vue.component('VAccordionTab', AccordionTab)
+Vue.component('VCalendar', Calendar)
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
 Vue.component('l-circle', LCircleMarker);

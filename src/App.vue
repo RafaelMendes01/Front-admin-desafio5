@@ -39,7 +39,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.background {
+body, html, .background {
   background-color: #e3e3e3;
 }
 </style>
