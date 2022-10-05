@@ -8,6 +8,12 @@ export default {
     getMovies: (token) => {
         return http.get('movies', token)
     },
+    getMoviesPaginate: (token, limit, skip) => {
+        return http.get(`movies/paginate?limit=${limit}&skip=${skip}`, token)
+    },
+    getMoviesCount: (token) => {
+        return http.get(`movies/count`, token)
+    },
     DeleteMovies: (token, id) => {
         return http.delete(`movies/${id}`, token)
     },
@@ -19,6 +25,12 @@ export default {
     },
     getUsers: (token) => {
         return http.get('users', token)
+    },
+    getUsersPaginate: (token, limit, skip) => {
+        return http.get(`users/paginate?limit=${limit}&skip=${skip}`, token)
+    },
+    getUsersCount: (token) => {
+        return http.get(`users/count`, token)
     },
     DeleteUsers: (token, id) => {
         return http.delete(`users/${id}`, token)
@@ -32,6 +44,12 @@ export default {
     getTheaters: (token) => {
         return http.get('theaters', token)
     },
+    getTheatersPaginate: (token, limit, skip) => {
+        return http.get(`theaters/paginate?limit=${limit}&skip=${skip}`, token)
+    },
+    getTheatersCount: (token) => {
+        return http.get(`theaters/count`, token)
+    },
     DeleteTheaters: (token, id) => {
         return http.delete(`theaters/${id}`, token)
     },
@@ -44,7 +62,19 @@ export default {
     getComments: (token) => {
         return http.get('comments', token)
     },
+    getCommentsPaginate: (token, limit, skip) => {
+        return http.get(`comments/paginate?limit=${limit}&skip=${skip}`, token)
+    },
+    getCommentsCount: (token) => {
+        return http.get(`comments/count`, token)
+    },
     getSessions: (token) => {
         return http.get('sessions', token)
+    },
+    getSessionsPaginate: (token, limit, skip) => {
+        return http.get(`sessions/paginate?limit=${limit}&skip=${skip}`, token)
+    },
+    getSessionsCount: (token) => {
+        return http.get(`sessions/count`, token)
     },
 }

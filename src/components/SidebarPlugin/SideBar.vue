@@ -5,12 +5,12 @@
        :data-image="backgroundImage">
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="#" class="simple-text logo__container">
+        <div class="simple-text logo__container">
             <div class="logo-img">
                 <img src="img/Logo_tallos.png" alt="logo_tallosflix">
             </div>
           {{title}}
-        </a>
+        </div>
       </div>
 
       <slot name="content"></slot>

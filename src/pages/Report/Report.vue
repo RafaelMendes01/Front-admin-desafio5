@@ -1,62 +1,49 @@
 <template>
   <div class="card">
-    <div class="mr-4">
-      <template>
-        <VButton
-          label="Listar Sessoes"
-          icon="pi pi-list"
-          class="p-button-primary mr-2"
-          @click="showSessionsData"
-        />
-        <VButton
-          label="Listar Comentarios"
-          icon="pi pi-list"
-          class="p-button-success mr-2"
-          @click="showCommentsData"
-        />
-      </template>
+    <div class="mr-2">
+      <div id="change-field">
+        <template>
+          <VButton
+            :label="title"
+            icon="pi pi-sync"
+            class="p-button-success"
+            @click="changeTable"
+          />
+        </template>
+      </div>
+      <router-view> </router-view>
     </div>
-    <VDataTable
-      :value="this.$store.state.Sessions"
-      :paginator="true"
-      :rows="5"
-      stripedRows
-    >
-      <VColumn field="_id" header="ID"></VColumn>
-      <VColumn field="user_id" header="User ID"></VColumn>
-      <VColumn field="jwt" header="JWT"></VColumn>
-    </VDataTable>
-     <VDataTable
-      :value="this.$store.state.Comments"
-      :paginator="true"
-      :rows="5"
-      stripedRows
-    >
-      <VColumn field="_id" header="ID"></VColumn>
-      <VColumn field="name" header="Name"></VColumn>
-      <VColumn field="email" header="Email"></VColumn>
-      <VColumn field="movie_id" header="Movie-ID"></VColumn>
-      <VColumn field="date" header="Date"></VColumn>
-    </VDataTable>
   </div>
 </template>
 <script>
 export default {
   methods: {
-    showSessionsData() {
-      this.$store.dispatch("getSessions", `Bearer ${this.$store.state.jwtToken}`);
-    },
-    showCommentsData() {
-      this.$store.dispatch("getComments", `Bearer ${this.$store.state.jwtToken}`);
+    changeTable() {
+      if (this.IsSession == false) {
+        this.IsSession = true;
+        this.title = "ir para Comentarios"
+        window.location.replace("/#/admin/Report/SessionsTable");
+      } else if (this.IsSession == true) {
+        this.IsSession = false;
+        this.title = "ir para Sessões"
+        window.location.replace("/#/admin/Report/CommentsTable");
+      }
     },
   },
   data() {
     return {
+      IsSession: false,
+      title: "ir para Sessões"
     };
   },
 };
 </script>
 <style scoped>
+#change-field {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
 </style>
 
 

@@ -2,6 +2,7 @@
     <div class="container">
         <div class="change-form">
             <h3>Bem vindo</h3>
+            <h4>Para entrar na aplicação primeiro preencha os campos ao lado</h4>
         </div>
         <div class="form">
             <form @submit.prevent="submit">
@@ -44,6 +45,9 @@ export default{
        async submit () {
         this.$store.dispatch('Login', this.user)
         }
+    },
+    created(){
+        localStorage.clear();
     }
 }
 </script>

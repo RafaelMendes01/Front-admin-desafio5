@@ -1,44 +1,82 @@
 <template>
-  <div class="card">
-    <VDialog header="Deletar Filme" :visible.sync="display">
-      <h6>inserir id</h6>
-      <input type="text" v-model="id" />
-      <template #footer>
-        <VButton
-          label="Cancelar"
-          icon="pi pi-times"
-          class="p-button-text"
-          @click="hiddenDeleteDialog"
-        />
-        <VButton
-          label="Deletar"
-          icon="pi pi-check"
-          autofocus
-          @click="deleteTheater"
-        />
-      </template>
-    </VDialog>
-    <VDialog header="Criar Filme" :visible.sync="displayC">
-      <h6>TheaterId</h6>
-      <input type="text" v-model="Theaters.theaterId" />
-      <h5>Location:</h5>
-      <h6>Street1</h6>
-      <input type="text" v-model="Theaters.location.address.street1" />
-      <h6>Street2</h6>
-      <input type="text" v-model="Theaters.location.address.street2" />
-      <h6>Zipcode</h6>
-      <input type="text" v-model="Theaters.location.address.zipcode" />
-      <h6>State</h6>
-      <input type="text" v-model="Theaters.location.address.state" />
-      <h6>City</h6>
-      <input type="text" v-model="Theaters.location.address.city" />
-      <h5>Geo:</h5>
-      <h6>Type</h6>
-      <input type="text" v-model="Theaters.location.geo.type" />
-      <h6>Latitude</h6>
-      <input type="text" v-model="Theaters.location.geo.coordinates[0]" />
-      <h6>Longitude</h6>
-      <input type="text" v-model="Theaters.location.geo.coordinates[1]" />
+  <div class="card mb-3">
+    <VConfirmDialog> </VConfirmDialog>
+    <VDialog header="Criar Teatro" :visible.sync="displayC">
+      <div class="dialog mt-3">
+        <div class="inputField">
+          <span class="p-float-label">
+            <VNumber
+              type="text"
+              v-model="Theaters.theaterId"
+              id="TheaterId"
+              :useGrouping="false"
+            />
+            <label for="TheaterId">TheaterId</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.street1"
+              id="street1"
+            />
+            <label for="street1">street1</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Theaters.location.address.street2" />
+            <label for="street2">street2</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.zipcode"
+              id="zipcode"
+            />
+            <label for="zipcode">zipcode</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.state"
+              id="state"
+            />
+            <label for="state">state</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.city"
+              id="city"
+            />
+            <label for="city">city</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.geo.type"
+              id="type"
+            />
+            <label for="type">type</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              v-model="Theaters.location.geo.coordinates[0]"
+              id="latitude"
+            />
+            <label for="latitude">latitude</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              v-model="Theaters.location.geo.coordinates[1]"
+              id="longitude"
+            />
+            <label for="longitude">longitude</label>
+          </span>
+        </div>
+      </div>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -54,29 +92,82 @@
         />
       </template>
     </VDialog>
-    <VDialog header="Atualizar Filme" :visible.sync="displayU">
-      <h6>inserir id</h6>
-      <input type="text" v-model="id" />
-      <h6>TheaterId</h6>
-      <input type="text" v-model="Theaters.location.address.theaterId" />
-      <h5>Location:</h5>
-      <h6>Street1</h6>
-      <input type="text" v-model="Theaters.location.address.street1" />
-      <h6>Street2</h6>
-      <input type="text" v-model="Theaters.location.address.street2" />
-      <h6>Zipcode</h6>
-      <input type="text" v-model="Theaters.location.address.zipcode" />
-      <h6>State</h6>
-      <input type="text" v-model="Theaters.location.address.state" />
-      <h6>City</h6>
-      <input type="text" v-model="Theaters.location.address.city" />
-      <h5>Geo:</h5>
-      <h6>Type</h6>
-      <input type="text" v-model="Theaters.location.geo.type" />
-      <h6>Latitude</h6>
-      <input type="text" v-model="Theaters.location.geo.coordinates[0]" />
-      <h6>Longitude</h6>
-      <input type="text" v-model="Theaters.location.geo.coordinates[1]" />
+    <VDialog :header="updateMessage" :visible.sync="displayU">
+      <div class="dialog mt-3">
+        <div class="inputField">
+          <span class="p-float-label">
+            <VNumber
+              type="text"
+              v-model="Theaters.theaterId"
+              id="TheaterId"
+              :useGrouping="false"
+            />
+            <label for="TheaterId">TheaterId</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.street1"
+              id="street1"
+            />
+            <label for="street1">street1</label>
+          </span>
+          <span class="p-float-label">
+            <VInput type="text" v-model="Theaters.location.address.street2" />
+            <label for="street2">street2</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.zipcode"
+              id="zipcode"
+            />
+            <label for="zipcode">zipcode</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.state"
+              id="state"
+            />
+            <label for="state">state</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.address.city"
+              id="city"
+            />
+            <label for="city">city</label>
+          </span>
+        </div>
+        <div class="inputField">
+          <span class="p-float-label">
+            <VInput
+              type="text"
+              v-model="Theaters.location.geo.type"
+              id="type"
+            />
+            <label for="type">type</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              v-model="Theaters.location.geo.coordinates[0]"
+              id="latitude"
+            />
+            <label for="latitude">latitude</label>
+          </span>
+          <span class="p-float-label">
+            <VInput
+              v-model="Theaters.location.geo.coordinates[1]"
+              id="longitude"
+            />
+            <label for="longitude">longitude</label>
+          </span>
+        </div>
+      </div>
       <template #footer>
         <VButton
           label="Cancelar"
@@ -92,61 +183,96 @@
         />
       </template>
     </VDialog>
-    <div class="mr-4">
-      <template>
-        <VButton
-          label="Listar"
-          icon="pi pi-list"
-          class="p-button-primary mr-2"
-          @click="showData"
-        />
-        <VButton
-          label="Criar"
-          icon="pi pi-plus"
-          class="p-button-success mr-2"
-          @click="showCreateDialog"
-        />
-        <VButton
-          label="Deletar"
-          icon="pi pi-trash"
-          class="p-button-danger mr-2"
-          @click="showDeleteDialog"
-        />
-        <VButton
-          label="Atualizar"
-          icon="pi pi-pencil"
-          class="p-button-warning"
-          @click="showUpdateDialog"
-        />
-      </template>
+    <div class="header mx-2 my-3">
+      <div class="ml-2">
+        <p class="text-title mr-2">Teatros:</p>
+      </div>
+      <div>
+        <template>
+          <VButton
+            label="Deletar"
+            icon="pi pi-trash"
+            class="p-button-danger mr-2"
+            @click="deleteTheater"
+          />
+          <VButton
+            label="Atualizar"
+            icon="pi pi-pencil"
+            class="p-button-warning mr-2"
+            @click="showUpdateDialog"
+          />
+          <VButton
+            label="Criar"
+            icon="pi pi-plus"
+            class="p-button-success mr-2"
+            @click="showCreateDialog"
+          />
+        </template>
+      </div>
     </div>
     <VDataTable
       :value="this.$store.state.Theaters"
       :paginator="true"
-      :rows="10"
-      stripedRows
+      :rows="15"
+      showGridlines
+      selectionMode="single"
+      @row-select="onRowSelect"
+      class="mb-5"
+      :resizableColumns="true"
+      columnResizeMode="expand"
+      :lazy="true"
+      :totalRecords="this.$store.state.TheatersCount"
+      ref="dt"
+      @page="onPage($event)"
     >
-      <VColumn field="_id" header="ID"></VColumn>
       <VColumn field="theaterId" header="Theater-id"></VColumn>
       <VColumn field="location.address.street1" header="Street"></VColumn>
       <VColumn field="location.address.city" header="City"></VColumn>
       <VColumn field="location.geo.coordinates" header="Coordinates"></VColumn>
     </VDataTable>
+    <l-map class="map" :zoom="2" :center="[51.505, -0.159]" :minZoom="1"
+      >>
+      <l-tile-layer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution="'&copy; <a target='_blank' href='http://osm.org/copyright'>OpenStreetMap</a> contributors'"
+      ></l-tile-layer>
+      <div
+        v-for="Theater in this.$store.state.Theaters"
+        :key="Theater.theaterId"
+      >
+        <l-circle
+          :lat-lng="Theater.location.geo.coordinates"
+          :radius="1"
+          :color="'red'"
+        >
+          <l-tooltip>{{ Theater.location.address.city }}</l-tooltip>
+        </l-circle>
+      </div>
+    </l-map>
   </div>
 </template>
 <script>
+import { LMap, LTileLayer, LCircle } from "vue2-leaflet";
 export default {
   methods: {
-    showData() {
-      this.$store.dispatch(
-        "getTheaters",
-        `Bearer ${this.$store.state.jwtToken}`
-      );
+    onRowSelect(event) {
+      this.id = event.data._id;
+      this.TheaterName = event.data.theaterId;
+      this.updateMessage = `Atualizar Teatro: ${this.TheaterName}`;
     },
-    showDeleteDialog() {
+    onPage(event) {
+      const data = {
+        jwt: `Bearer ${this.jwt}`,
+        limit: 15,
+        skip: event.page + 1,
+      };
+      this.skip = data.skip;
+      this.$store.dispatch("getTheatersPaginate", data);
+    },
+    showPaginateDialog() {
       this.display = true;
     },
-    hiddenDeleteDialog() {
+    hiddenPaginateDialog() {
       this.display = false;
     },
     showCreateDialog() {
@@ -162,41 +288,90 @@ export default {
       this.displayU = false;
     },
     deleteTheater() {
-      const data = {
-        id: this.id,
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
-      };
-      this.$store.dispatch("deleteTheaters", data);
+      this.$confirm.require({
+        message: `Deseja Remover: ${this.TheaterName}`,
+        header: "Confirmação",
+        icon: "pi pi-exclamation-triangle",
+        acceptLabel: "Deletar",
+        rejectLabel: "Cancelar",
+        accept: async  () => {
+          const data = {
+            id: this.id,
+            jwt: `Bearer ${this.jwt}`,
+          };
+          const data2 = {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+          await this.$store.dispatch("deleteTheaters", data);
+          await this.$store.dispatch("getTheatersPaginate", data2);
+        },
+      });
     },
-    createTheater() {
-      this.Theaters.location.geo.coordinates[0] = parseFloat(this.Theaters.location.geo.coordinates[0]);
-      this.Theaters.location.geo.coordinates[1] = parseFloat(this.Theaters.location.geo.coordinates[1]);
+    async createTheater() {
+      this.Theaters.location.geo.coordinates[0] = parseFloat(
+        this.Theaters.location.geo.coordinates[0]
+      );
+      this.Theaters.location.geo.coordinates[1] = parseFloat(
+        this.Theaters.location.geo.coordinates[1]
+      );
       const data = {
         Theaters: this.Theaters,
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        jwt: `Bearer ${this.jwt}`,
       };
-      this.$store.dispatch("createTheaters", data);
+       const data2 = {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+      await this.$store.dispatch("createTheaters", data);
+      await this.$store.dispatch("getTheatersPaginate", data2);
+      this.displayC = false;
     },
-    updateTheater() {
-      this.Theaters.location.geo.coordinates[0] = parseFloat(this.Theaters.location.geo.coordinates[0]);
-      this.Theaters.location.geo.coordinates[1] = parseFloat(this.Theaters.location.geo.coordinates[1]);
+    async updateTheater() {
+      this.Theaters.location.geo.coordinates[0] = parseFloat(
+        this.Theaters.location.geo.coordinates[0]
+      );
+      this.Theaters.location.geo.coordinates[1] = parseFloat(
+        this.Theaters.location.geo.coordinates[1]
+      );
       const data = {
         Theaters: this.Theaters,
-        jwt: `Bearer ${this.$store.state.jwtToken}`,
+        jwt: `Bearer ${this.jwt}`,
         id: this.id,
       };
-      console.log(data)
-      this.$store.dispatch("updateTheaters", data);
+      const data2 = {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+      await this.$store.dispatch("updateTheaters", data);
+      await this.$store.dispatch("getTheatersPaginate", data2);
+      this.displayU = false;
     },
+  },
+  mounted() {
+    const data = {
+      jwt: `Bearer ${this.jwt}`,
+      limit: 15,
+      skip: 1,
+    };
+    this.skip = data.skip;
+    this.$store.dispatch("getTheatersPaginate", data);
   },
   data() {
     return {
       display: false,
       displayC: false,
       displayU: false,
+      jwt: localStorage.getItem("token"),
+      TheaterName: "",
+      updateMessage: "Nenhum teatro selecionado",
+      skip: undefined,
       id: "",
       Theaters: {
-        theaterId: "",
+        theaterId: undefined,
         location: {
           address: {
             street1: "",
@@ -211,10 +386,33 @@ export default {
           },
         },
       },
+      LMap,
+      LTileLayer,
+      LCircle,
     };
   },
 };
 </script>
 <style scoped>
+.dialog {
+  display: flex;
+  gap: 0.8rem;
+}
+.inputField {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.map {
+  height: 75vh;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.text-title {
+  font-weight: bolder;
+  font-size: 1.6rem;
+  display: inline;
+}
 </style>
-

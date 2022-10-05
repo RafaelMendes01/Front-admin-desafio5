@@ -2,6 +2,10 @@
   <div class="wrapper">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
+      <sidebar-link to="/admin/Overview">
+        <i class="nc-icon nc-chart-pie-35"></i>
+        <p>Overview</p>
+      </sidebar-link>
       <sidebar-link to="/admin/Movies">
         <i class="nc-icon nc-button-play"></i>
         <p>Filmes</p>
@@ -14,19 +18,20 @@
         <i class="nc-icon nc-single-02"></i>
         <p>Usuarios</p>
       </sidebar-link>
-      <sidebar-link to="/admin/Report">
+      <sidebar-link to="/admin/Report/CommentsTable">
         <i class="nc-icon nc-notes"></i>
         <p>Formularios</p>
       </sidebar-link>
+      <sidebar-link to="/">
+        <i class="nc-icon nc-button-power"></i>
+        <p>Log-Out</p>
+      </sidebar-link>
     </side-bar>
     <div class="main-panel">
-      <top-navbar></top-navbar>
 
       <dashboard-content @click="toggleSidebar">
 
       </dashboard-content>
-
-      <content-footer></content-footer>
     </div>
   </div>
 </template>
@@ -51,7 +56,15 @@
           this.$sidebar.displaySidebar(false)
         }
       }
-    }
+    },
+    created(){
+     this.$toast.add({
+          severity: "info",
+          summary: "Usuario logado",
+          detail: `seja bem vindo a nossa aplicação ${this.$store.state.UserName}`,
+          life: 4000,
+        });
+  }
   }
 
 </script>
