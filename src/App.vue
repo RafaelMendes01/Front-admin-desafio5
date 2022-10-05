@@ -30,7 +30,7 @@ export default {
           severity: "success",
           summary: "sucesso",
           detail: `Requisição realizada`,
-          life: 1500,
+          life: 500,
         });
         this.$store.state.successMessage = "";
       }
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.background {
+body, html, .background {
   background-color: #e3e3e3;
 }
 </style>

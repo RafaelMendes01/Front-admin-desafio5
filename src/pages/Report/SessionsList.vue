@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="session-container">
     <VDialog header="Limitar Lista" :visible.sync="display">
       <h6>Quantidade</h6>
       <input type="text" v-model="limit" />
@@ -22,18 +22,7 @@
     </VDialog>
     <div class="mb-3 mx-2">
          <template>
-        <VButton
-          label="Listar Sessoes"
-          icon="pi pi-list"
-          class="p-button-primary mr-2"
-          @click="showSessionsData"
-        />
-        <VButton
-        label="Limitar Listagem"
-        icon="pi pi-sliders-h"
-        class="p-button-info mr-2"
-        @click="showPaginateDialog"
-      />
+          <h3>Sessões:</h3>
       </template>
     </div>
     <VDataTable
@@ -41,6 +30,12 @@
       :paginator="true"
       :rows="15"
       showGridlines
+      :resizableColumns="true" 
+      columnResizeMode="expand"
+      :lazy="true"
+      :totalRecords="this.$store.state.SessionsCount"
+      ref="dt"
+      @page="onPage($event)"
     >
       <VColumn field="user_id" header="User ID"></VColumn>
       <VColumn field="jwt" header="JWT"></VColumn>
@@ -49,25 +44,23 @@
 </template>
 <script>
 export default {
-  methods: {
-     getSessionsPaginate() {
-      const data = {
+   methods: {
+     onPage(event){
+       const data = {
         jwt: `Bearer ${this.jwt}`,
-        limit: this.limit,
-        skip: this.skip,
+        limit: 15,
+        skip: event.page+1,
       };
       this.$store.dispatch("getSessionsPaginate", data);
-      this.display = false;
     },
-    showSessionsData() {
-      this.$store.dispatch("getSessions", `Bearer ${this.jwt}`);
-    },
-     showPaginateDialog() {
-      this.display = true;
-    },
-    hiddenPaginateDialog() {
-      this.display = false;
-    },
+  },
+    mounted(){
+    const data = {
+        jwt: `Bearer ${this.jwt}`,
+        limit: 15,
+        skip: 1,
+      };
+      this.$store.dispatch("getSessionsPaginate", data);
   },
   data(){
     return {
@@ -80,6 +73,10 @@ export default {
 };
 </script>
 <style scoped>
+.session-container{
+  max-width: 100vw !important;
+   word-wrap: break-word !important;
+}
 </style>
 
 
