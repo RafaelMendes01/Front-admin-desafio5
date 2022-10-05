@@ -1,30 +1,6 @@
 <template>
   <div class="card">
     <VConfirmDialog> </VConfirmDialog>
-     <VDialog header="Limitar Lista" :visible.sync="display">
-      <span class="p-float-label mt-2 mb-4">
-        <VNumber type="text" v-model="limit" id="Quantidade" />
-        <label for="Quantidade">Quantidade</label>
-      </span>
-      <span class="p-float-label">
-        <VNumber type="text" v-model="skip" id="Pagina" />
-        <label for="Pagina">Pagina</label>
-      </span>
-      <template #footer>
-        <VButton
-          label="Cancelar"
-          icon="pi pi-times"
-          class="p-button-text"
-          @click="hiddenPaginateDialog"
-        />
-        <VButton
-          label="Listar"
-          icon="pi pi-check"
-          autofocus
-          @click="getUsersPaginate"
-        />
-      </template>
-    </VDialog>
     <VDialog header="Criar Usuario" :visible.sync="displayC">
       <div class="dialog mt-2">
         <span class="p-float-label">
@@ -54,7 +30,7 @@
           @click="createUser"
         />
       </template>
-    </VDialog >
+    </VDialog>
     <VDialog :header="updateMessage" :visible.sync="displayU">
       <div class="dialog mt-2">
         <span class="p-float-label">
@@ -85,33 +61,33 @@
         />
       </template>
     </VDialog>
-   <div class="header mx-2 my-3">
-        <div class="ml-2">
-           <p class="text-title mr-2">Usuarios:</p>
-        </div>
-    <div>
-      <template>
-        <VButton
-          label="Criar"
-          icon="pi pi-plus"
-          class="p-button-success mr-2"
-          @click="showCreateDialog"
-        />
-        <VButton
-          label="Deletar"
-          icon="pi pi-trash"
-          class="p-button-danger mr-2"
-          @click="deleteUser"
-        />
-        <VButton
-          label="Atualizar"
-          icon="pi pi-pencil"
-          class="p-button-warning"
-          @click="showUpdateDialog"
-        />
-      </template>
+    <div class="header mx-2 my-3">
+      <div class="ml-2">
+        <p class="text-title mr-2">Usuarios:</p>
+      </div>
+      <div>
+        <template>
+          <VButton
+            label="Criar"
+            icon="pi pi-plus"
+            class="p-button-success mr-2"
+            @click="showCreateDialog"
+          />
+          <VButton
+            label="Deletar"
+            icon="pi pi-trash"
+            class="p-button-danger mr-2"
+            @click="deleteUser"
+          />
+          <VButton
+            label="Atualizar"
+            icon="pi pi-pencil"
+            class="p-button-warning"
+            @click="showUpdateDialog"
+          />
+        </template>
+      </div>
     </div>
-   </div>
     <VDataTable
       :value="this.$store.state.Users"
       :paginator="true"
@@ -119,7 +95,7 @@
       showGridlines
       selectionMode="single"
       @row-select="onRowSelect"
-      :resizableColumns="true" 
+      :resizableColumns="true"
       columnResizeMode="expand"
       :lazy="true"
       :totalRecords="this.$store.state.UsersCount"
@@ -134,12 +110,13 @@
 <script>
 export default {
   methods: {
-    onPage(event){
-       const data = {
+    onPage(event) {
+      const data = {
         jwt: `Bearer ${this.jwt}`,
         limit: 15,
-        skip: event.page+1,
+        skip: event.page + 1,
       };
+      this.skip = data.skip;
       this.$store.dispatch("getUsersPaginate", data);
     },
     onRowSelect(event) {
@@ -172,36 +149,55 @@ export default {
         icon: "pi pi-exclamation-triangle",
         acceptLabel: "Deletar",
         rejectLabel: "Cancelar",
-        accept: () => {
+        accept: async () => {
           const data = {
             id: this.id,
             jwt: `Bearer ${this.jwt}`,
           };
-          this.$store.dispatch("deleteUsers", data);
+          const data2 = {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+          await this.$store.dispatch("deleteUsers", data);
+          await this.$store.dispatch("getUsersPaginate", data2);
         },
       });
     },
-    createUser() {
-      this.$store.dispatch("createUsers", this.Users);
+    async createUser() {
+       const data2= {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+      await this.$store.dispatch("createUsers", this.Users);
+      await this.$store.dispatch("getUsersPaginate", data2);
       this.displayC = false;
     },
-    updateUser() {
+    async updateUser() {
       const data = {
         Users: this.Users,
         jwt: `Bearer ${this.jwt}`,
         id: this.id,
       };
-      this.$store.dispatch("updateUsers", data);
+      const data2 = {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+      await this.$store.dispatch("updateUsers", data);
+      await this.$store.dispatch("getUsersPaginate", data2)
       this.displayU = false;
     },
   },
-   mounted(){
+  mounted() {
     const data = {
-        jwt: `Bearer ${this.jwt}`,
-        limit: 15,
-        skip: 1,
-      };
-      this.$store.dispatch("getUsersPaginate", data);
+      jwt: `Bearer ${this.jwt}`,
+      limit: 15,
+      skip: 1,
+    };
+    this.skip = data.skip;
+    this.$store.dispatch("getUsersPaginate", data);
   },
   data() {
     return {
@@ -211,7 +207,6 @@ export default {
       jwt: localStorage.getItem("token"),
       UserName: "",
       updateMessage: "Nenhum usuario selecionado",
-      limit: undefined,
       skip: undefined,
       id: "",
       Users: {
@@ -232,11 +227,11 @@ export default {
   width: 100%;
   gap: 1.5rem;
 }
-.header{
+.header {
   display: flex;
   justify-content: space-between;
 }
-.text-title{
+.text-title {
   font-weight: bolder;
   font-size: 1.6rem;
   display: inline;

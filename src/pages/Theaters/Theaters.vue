@@ -1,30 +1,6 @@
 <template>
   <div class="card mb-3">
     <VConfirmDialog> </VConfirmDialog>
-    <VDialog header="Limitar Lista" :visible.sync="display">
-      <span class="p-float-label mt-2 mb-4">
-        <VNumber type="text" v-model="limit" id="Quantidade" />
-        <label for="Quantidade">Quantidade</label>
-      </span>
-      <span class="p-float-label">
-        <VNumber type="text" v-model="skip" id="Pagina" />
-        <label for="Pagina">Pagina</label>
-      </span>
-      <template #footer>
-        <VButton
-          label="Cancelar"
-          icon="pi pi-times"
-          class="p-button-text"
-          @click="hiddenPaginateDialog"
-        />
-        <VButton
-          label="Listar"
-          icon="pi pi-check"
-          autofocus
-          @click="getTheatersPaginate"
-        />
-      </template>
-    </VDialog>
     <VDialog header="Criar Teatro" :visible.sync="displayC">
       <div class="dialog mt-3">
         <div class="inputField">
@@ -208,31 +184,31 @@
       </template>
     </VDialog>
     <div class="header mx-2 my-3">
-        <div class="ml-2">
-           <p class="text-title mr-2">Teatros:</p>
-        </div>
-    <div>
-      <template>
-        <VButton
-          label="Criar"
-          icon="pi pi-plus"
-          class="p-button-success mr-2"
-          @click="showCreateDialog"
-        />
-        <VButton
-          label="Deletar"
-          icon="pi pi-trash"
-          class="p-button-danger mr-2"
-          @click="deleteTheater"
-        />
-        <VButton
-          label="Atualizar"
-          icon="pi pi-pencil"
-          class="p-button-warning"
-          @click="showUpdateDialog"
-        />
-      </template>
-    </div>
+      <div class="ml-2">
+        <p class="text-title mr-2">Teatros:</p>
+      </div>
+      <div>
+        <template>
+          <VButton
+            label="Criar"
+            icon="pi pi-plus"
+            class="p-button-success mr-2"
+            @click="showCreateDialog"
+          />
+          <VButton
+            label="Deletar"
+            icon="pi pi-trash"
+            class="p-button-danger mr-2"
+            @click="deleteTheater"
+          />
+          <VButton
+            label="Atualizar"
+            icon="pi pi-pencil"
+            class="p-button-warning"
+            @click="showUpdateDialog"
+          />
+        </template>
+      </div>
     </div>
     <VDataTable
       :value="this.$store.state.Theaters"
@@ -242,7 +218,7 @@
       selectionMode="single"
       @row-select="onRowSelect"
       class="mb-5"
-      :resizableColumns="true" 
+      :resizableColumns="true"
       columnResizeMode="expand"
       :lazy="true"
       :totalRecords="this.$store.state.TheatersCount"
@@ -254,18 +230,22 @@
       <VColumn field="location.address.city" header="City"></VColumn>
       <VColumn field="location.geo.coordinates" header="Coordinates"></VColumn>
     </VDataTable>
-    <l-map class="map" :zoom="2" :center="[51.505, -0.159]" :minZoom="1">>
+    <l-map class="map" :zoom="2" :center="[51.505, -0.159]" :minZoom="1"
+      >>
       <l-tile-layer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="'&copy; <a target='_blank' href='http://osm.org/copyright'>OpenStreetMap</a> contributors'"
       ></l-tile-layer>
-      <div v-for="Theater in this.$store.state.Theaters" :key="Theater.theaterId">
+      <div
+        v-for="Theater in this.$store.state.Theaters"
+        :key="Theater.theaterId"
+      >
         <l-circle
           :lat-lng="Theater.location.geo.coordinates"
           :radius="1"
           :color="'red'"
         >
-        <l-tooltip>{{Theater.location.address.city}}</l-tooltip>
+          <l-tooltip>{{ Theater.location.address.city }}</l-tooltip>
         </l-circle>
       </div>
     </l-map>
@@ -280,12 +260,13 @@ export default {
       this.TheaterName = event.data.theaterId;
       this.updateMessage = `Atualizar Teatro: ${this.TheaterName}`;
     },
-   onPage(event){
-       const data = {
+    onPage(event) {
+      const data = {
         jwt: `Bearer ${this.jwt}`,
         limit: 15,
-        skip: event.page+1,
+        skip: event.page + 1,
       };
+      this.skip = data.skip;
       this.$store.dispatch("getTheatersPaginate", data);
     },
     showPaginateDialog() {
@@ -313,16 +294,22 @@ export default {
         icon: "pi pi-exclamation-triangle",
         acceptLabel: "Deletar",
         rejectLabel: "Cancelar",
-        accept: () => {
+        accept: async  () => {
           const data = {
             id: this.id,
             jwt: `Bearer ${this.jwt}`,
           };
-          this.$store.dispatch("deleteTheaters", data);
+          const data2 = {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+          await this.$store.dispatch("deleteTheaters", data);
+          await this.$store.dispatch("getTheatersPaginate", data2);
         },
       });
     },
-    createTheater() {
+    async createTheater() {
       this.Theaters.location.geo.coordinates[0] = parseFloat(
         this.Theaters.location.geo.coordinates[0]
       );
@@ -333,10 +320,16 @@ export default {
         Theaters: this.Theaters,
         jwt: `Bearer ${this.jwt}`,
       };
-      this.$store.dispatch("createTheaters", data);
+       const data2 = {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+      await this.$store.dispatch("createTheaters", data);
+      await this.$store.dispatch("getTheatersPaginate", data2);
       this.displayC = false;
     },
-    updateTheater() {
+    async updateTheater() {
       this.Theaters.location.geo.coordinates[0] = parseFloat(
         this.Theaters.location.geo.coordinates[0]
       );
@@ -348,18 +341,24 @@ export default {
         jwt: `Bearer ${this.jwt}`,
         id: this.id,
       };
-      console.log(data);
-      this.$store.dispatch("updateTheaters", data);
+      const data2 = {
+            jwt: `Bearer ${this.jwt}`,
+            limit: 15,
+            skip: this.skip,
+          };
+      await this.$store.dispatch("updateTheaters", data);
+      await this.$store.dispatch("getTheatersPaginate", data2);
       this.displayU = false;
     },
   },
-   mounted(){
+  mounted() {
     const data = {
-        jwt: `Bearer ${this.jwt}`,
-        limit: 15,
-        skip: 1,
-      };
-      this.$store.dispatch("getTheatersPaginate", data);
+      jwt: `Bearer ${this.jwt}`,
+      limit: 15,
+      skip: 1,
+    };
+    this.skip = data.skip;
+    this.$store.dispatch("getTheatersPaginate", data);
   },
   data() {
     return {
@@ -369,7 +368,6 @@ export default {
       jwt: localStorage.getItem("token"),
       TheaterName: "",
       updateMessage: "Nenhum teatro selecionado",
-      limit: undefined,
       skip: undefined,
       id: "",
       Theaters: {
@@ -405,14 +403,14 @@ export default {
   flex-direction: column;
   gap: 1.5rem;
 }
-.map{
+.map {
   height: 75vh;
 }
-.header{
+.header {
   display: flex;
   justify-content: space-between;
 }
-.text-title{
+.text-title {
   font-weight: bolder;
   font-size: 1.6rem;
   display: inline;

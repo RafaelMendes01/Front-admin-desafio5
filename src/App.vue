@@ -30,7 +30,7 @@ export default {
           severity: "success",
           summary: "sucesso",
           detail: `Requisição realizada`,
-          life: 1500,
+          life: 500,
         });
         this.$store.state.successMessage = "";
       }
