@@ -68,12 +68,6 @@
       <div>
         <template>
           <VButton
-            label="Criar"
-            icon="pi pi-plus"
-            class="p-button-success mr-2"
-            @click="showCreateDialog"
-          />
-          <VButton
             label="Deletar"
             icon="pi pi-trash"
             class="p-button-danger mr-2"
@@ -82,8 +76,14 @@
           <VButton
             label="Atualizar"
             icon="pi pi-pencil"
-            class="p-button-warning"
+            class="p-button-warning mr-2"
             @click="showUpdateDialog"
+          />
+           <VButton
+            label="Criar"
+            icon="pi pi-plus"
+            class="p-button-success mr-2"
+            @click="showCreateDialog"
           />
         </template>
       </div>
