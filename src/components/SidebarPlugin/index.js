@@ -1,8 +1,8 @@
 import Sidebar from './SideBar.vue'
 import SidebarLink from './SidebarLink.vue'
+import Store from '../../store/index'
 
 const SidebarStore = {
-  showSidebar: false,
   sidebarLinks: [
     {
       name: 'Dashboard',
@@ -11,7 +11,12 @@ const SidebarStore = {
     }
   ],
   displaySidebar (value) {
-    this.showSidebar = value
+    if(value === true){
+      Store.state.IsOpenSideBar = "sidebarShow"
+    }
+    else if(value === false){
+      Store.state.IsOpenSideBar = ""
+    }
   }
 }
 

@@ -20,7 +20,8 @@ export default new vuex.Store({
         CommentsCount: 0,
         SessionsCount: 0,
         errorMessage: "",
-        successMessage: ""
+        successMessage: "",
+        IsOpenSideBar: "",
     },
     mutations: {
         'Login'(state, userData) {

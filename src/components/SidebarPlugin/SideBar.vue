@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar"
+  <div :class="`${this.$store.state.IsOpenSideBar} sidebar`"
        :style="sidebarStyle"
        :data-color="backgroundColor"
        :data-image="backgroundImage">
@@ -85,7 +85,7 @@
           backgroundImage: `url(${this.backgroundImage})`
         }
       }
-    }
+    },
   }
 
 </script>

@@ -11,18 +11,21 @@
                     placeholder="Nome"
                     v-model="user.name"
                     :addonLeftIcon="'nc-icon nc-single-02'"
+                    class="input-text"
                     >
                   </base-input>
                    <base-input type="email"
                     placeholder="Email"
                     v-model="user.email"
                     :addonLeftIcon="'nc-icon nc-email-83'"
+                    class="input-text"
                     >
                   </base-input>
                     <base-input type="password"
                     placeholder="Senha"
                     v-model="user.password"
                     :addonLeftIcon="'nc-icon nc-lock-circle-open'"
+                    class="input-text"
                     >
                   </base-input>
                  <button class="btn btn-primary btn-fill" type="submit">Logar</button>

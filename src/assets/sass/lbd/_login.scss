@@ -1,10 +1,12 @@
 @import './_variables.scss';
-.container{
+
+.container {
     overflow-y: hidden;
     height: 100vh;
     display: flex;
     align-items: center;
-    .change-form{
+
+    .change-form {
         background-color: $primary-bg;
         width: 40%;
         height: 92%;
@@ -13,14 +15,18 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        h3, h4{
+
+        h3,
+        h4 {
             color: $white-bg;
             text-align: center;
         }
-        p{
+
+        p {
             color: $white-bg;
         }
     }
+
     .form {
         background-color: $white-bg;
         width: 60%;
@@ -29,20 +35,68 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        form{
+
+        form {
             width: 65%;
+            height: 60%;
             display: flex;
             flex-direction: column;
-            h3{
+
+            h3 {
                 align-self: center;
                 color: $primary-bg;
                 margin-bottom: 2rem !important;
             }
-            button{
+
+            button {
                 width: 30%;
                 align-self: center;
                 border-radius: 25px;
             }
         }
-    }    
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .change-form {
+            width:  100%;
+            height: 10%;
+            border-radius: 25px 25px 0px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h3{
+            font-size: 20px;
+            margin-bottom: 1rem !important;
+        }
+        h4 {
+            display: none;
+        }
+        .form {
+            width: 100%;
+            height: auto;
+            padding-bottom: 40px;
+            border-radius: 0px 0px 25px 25px;
+            align-items: flex-start;
+            form {
+                margin-top: 2rem;
+                gap: 0.5rem;
+                width: 80%;
+                h3 {
+                    margin-bottom: 1rem !important;
+                }
+                /*.input-text{
+                }*/
+                button {
+                    width: 100%
+                }
+            }
+        }
+    }
 }
