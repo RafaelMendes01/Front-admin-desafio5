@@ -33,6 +33,7 @@
               id="Genres"
               :allowDuplicate="false"
               class="arrayInput"
+              separator="," 
             />
             <label for="Genres">Genres</label>
           </span>
@@ -57,6 +58,7 @@
               id="Directors"
               :allowDuplicate="false"
               class="arrayInput"
+              separator=","
             />
             <label for="Directors">Directors</label>
           </span>
@@ -66,6 +68,7 @@
               id="Writers"
               :allowDuplicate="false"
               class="arrayInput"
+              separator="," 
             />
             <label for="Writers">Writers</label>
           </span>
@@ -75,6 +78,7 @@
               id="Countries"
               :allowDuplicate="false"
               class="arrayInput"
+              separator="," 
             />
             <label for="Countries">Countries</label>
           </span>
@@ -84,6 +88,7 @@
               id="Languages"
               :allowDuplicate="false"
               class="arrayInput"
+              separator="," 
             />
             <label for="Languages">Languages</label>
           </span>
@@ -270,7 +275,7 @@
         />
       </template>
     </VDialog>
-    <VDialog :header="updateMessage" :visible.sync="displayU">
+    <VDialog :header="updateMessage" :visible.sync="displayU" class="updateDialog">
       <div class="dialog my-2">
         <div class="inputField">
           <span class="p-float-label">
@@ -302,6 +307,7 @@
               id="Genres"
               :allowDuplicate="false"
               class="arrayInput"
+              separator="," 
             />
             <label for="Genres">Genres</label>
           </span>
@@ -326,6 +332,7 @@
               id="Directors"
               :allowDuplicate="false"
               class="arrayInput"
+              separator="," 
             />
             <label for="Directors">Directors</label>
           </span>
@@ -335,6 +342,7 @@
               id="Writers"
               :allowDuplicate="false"
               class="arrayInput"
+              separator=","
             />
             <label for="Writers">Writers</label>
           </span>
@@ -344,6 +352,7 @@
               id="Countries"
               :allowDuplicate="false"
               class="arrayInput"
+              separator="," 
             />
             <label for="Countries">Countries</label>
           </span>
@@ -353,6 +362,7 @@
               id="Languages"
               :allowDuplicate="false"
               class="arrayInput"
+              separator="." 
             />
             <label for="Languages">Languages</label>
           </span>
@@ -574,7 +584,9 @@
       @row-select="onRowSelect"
       showGridlines
       :resizableColumns="true"
-      columnResizeMode="fit"
+      columnResizeMode="expand"
+      responsiveLayout="stack"
+      breakpoint="960px"
       :lazy="true"
       :totalRecords="this.$store.state.MoviesCount"
       ref="dt"
@@ -767,5 +779,18 @@ export default {
   font-weight: bolder;
   font-size: 1.6rem;
   display: inline;
+}
+@media only screen and (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+  .dialog{
+    flex-direction: column;
+  }
+  .inputField{
+    width: 100%;
+  }
 }
 </style>

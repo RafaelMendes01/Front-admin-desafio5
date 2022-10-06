@@ -68,11 +68,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-4">
           <VCalendar :inline="true" :showWeek="true" />
         </div>
 
-        <div class="col-md-6" v-if="pieChart.data.series[0] !== 0">
+        <div class="col-md-6 mb-4" v-if="pieChart.data.series[0] !== 0">
           <chart-card :chart-data="pieChart.data" chart-type="Pie">
             <template slot="header">
               <h4 class="card-title">Estatisticas de dados</h4>
