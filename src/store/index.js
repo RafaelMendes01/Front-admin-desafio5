@@ -22,6 +22,7 @@ export default new vuex.Store({
         errorMessage: "",
         successMessage: "",
         IsOpenSideBar: "",
+        isClicked: false
     },
     mutations: {
         'Login'(state, userData) {
@@ -100,7 +101,6 @@ export default new vuex.Store({
             await Requests.getMoviesPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
                 .then(res => {
                     commit('GET_MOVIES', res.data)
-                    console.log(res)
                 })
                 .catch(error => {
                     commit("setErrorMessage", error.message);
@@ -152,7 +152,6 @@ export default new vuex.Store({
                 })
         },
         async getUsersPaginate({ commit }, data) {
-            console.log(data)
             await Requests.getUsersPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
                 .then(res => {
                     commit('GET_USERS', res.data)
@@ -207,7 +206,6 @@ export default new vuex.Store({
                 })
         },
         async getTheatersPaginate({ commit }, data) {
-            console.log(data)
             await Requests.getTheatersPaginate({ headers: { Authorization: data.jwt } }, data.limit, data.skip)
                 .then(res => {
                     commit('GET_THEATERS', res.data)

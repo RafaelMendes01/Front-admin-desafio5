@@ -19,24 +19,19 @@
   export default {
     methods: {
       toggleSidebar () {
-        if(this.isClicked === false){
+        if(this.$store.state.isClicked === false){
           this.$sidebar.displaySidebar(true)
-          this.isClicked = true
+          this.$store.state.isClicked = true
         }
         else {
           this.$sidebar.displaySidebar(false)
-           this.isClicked = false
+           this.$store.state.isClicked = false
         }
       },
       hideSidebar () {
         this.$sidebar.displaySidebar(false)
       }
     },
-    data(){
-      return {
-        isClicked: false
-      }
-    }
   }
 
 </script>
