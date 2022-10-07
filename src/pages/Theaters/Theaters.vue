@@ -415,4 +415,17 @@ export default {
   font-size: 1.6rem;
   display: inline;
 }
+@media only screen and (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+  .dialog{
+    flex-direction: column;
+  }
+  .inputField{
+    width: 100%;
+  }
+}
 </style>

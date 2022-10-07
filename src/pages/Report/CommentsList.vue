@@ -30,8 +30,6 @@
       :paginator="true"
       :rows="15"
       showGridlines
-      :resizableColumns="true" 
-      columnResizeMode="expand"
       :lazy="true"
       :totalRecords="this.$store.state.CommentsCount"
       ref="dt"
