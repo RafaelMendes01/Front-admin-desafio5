@@ -20,6 +20,18 @@
             <VInput type="text" v-model="Movies.poster" id="Poster" />
             <label for="Poster">Poster</label>
           </span>
+           <span class="p-float-label">
+            <VNumber
+              v-model="Movies.metacritic"
+              id="Metacritic"
+              :useGrouping="false"
+              :minFractionDigits="1"
+              :maxFractionDigits="1"
+              :min="0.0"
+              :max="10.0"
+            />
+            <label for="Metacritic">Metacritic</label>
+          </span>
         </div>
 
         <div class="inputField">
@@ -49,9 +61,23 @@
             <VNumber v-model="Movies.year" id="Year" :useGrouping="false" />
             <label for="Year">Year</label>
           </span>
+            <span class="p-float-label">
+            <VInput type="text" v-model="Movies.rated" />
+            <label for="Rated">Rated</label>
+          </span>
         </div>
 
         <div class="inputField">
+              <span class="p-float-label">
+            <VChips
+              v-model="Movies.cast"
+              id="Cast"
+              :allowDuplicate="false"
+              class="arrayInput"
+              separator="," 
+            />
+            <label for="Cast">Cast</label>
+          </span>
           <span class="p-float-label">
             <VChips
               v-model="Movies.directors"
@@ -93,38 +119,6 @@
             <label for="Languages">Languages</label>
           </span>
         </div>
-
-        <div class="inputField">
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.rated" />
-            <label for="Rated">Rated</label>
-          </span>
-          <span class="p-float-label">
-            <VNumber
-              v-model="Movies.metacritic"
-              id="Metacritic"
-              :useGrouping="false"
-              :minFractionDigits="1"
-              :maxFractionDigits="1"
-              :min="0.0"
-              :max="10.0"
-            />
-            <label for="Metacritic">Metacritic</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.released" id="Released" />
-            <label for="Released">Released</label>
-          </span>
-          <span class="p-float-label">
-            <VInput
-              type="string"
-              v-model="Movies.lastupdated"
-              id="LastUpdated"
-            />
-            <label for="LastUpdated">LastUpdated</label>
-          </span>
-        </div>
-
         <div class="inputField">
           <VAccordion>
             <VAccordionTab header="Awards">
@@ -294,6 +288,18 @@
             <VInput type="text" v-model="Movies.poster" id="Poster" />
             <label for="Poster">Poster</label>
           </span>
+           <span class="p-float-label">
+            <VNumber
+              v-model="Movies.metacritic"
+              id="Metacritic"
+              :useGrouping="false"
+              :minFractionDigits="1"
+              :maxFractionDigits="1"
+              :min="0.0"
+              :max="10.0"
+            />
+            <label for="Metacritic">Metacritic</label>
+          </span>
         </div>
 
         <div class="inputField">
@@ -323,16 +329,30 @@
             <VNumber v-model="Movies.year" id="Year" :useGrouping="false" />
             <label for="Year">Year</label>
           </span>
+            <span class="p-float-label">
+            <VInput type="text" v-model="Movies.rated" />
+            <label for="Rated">Rated</label>
+          </span>
         </div>
 
         <div class="inputField">
+              <span class="p-float-label">
+            <VChips
+              v-model="Movies.cast"
+              id="Cast"
+              :allowDuplicate="false"
+              class="arrayInput"
+              separator="," 
+            />
+            <label for="Cast">Cast</label>
+          </span>
           <span class="p-float-label">
             <VChips
               v-model="Movies.directors"
               id="Directors"
               :allowDuplicate="false"
               class="arrayInput"
-              separator="," 
+              separator=","
             />
             <label for="Directors">Directors</label>
           </span>
@@ -342,7 +362,7 @@
               id="Writers"
               :allowDuplicate="false"
               class="arrayInput"
-              separator=","
+              separator="," 
             />
             <label for="Writers">Writers</label>
           </span>
@@ -362,43 +382,11 @@
               id="Languages"
               :allowDuplicate="false"
               class="arrayInput"
-              separator="." 
+              separator="," 
             />
             <label for="Languages">Languages</label>
           </span>
         </div>
-
-        <div class="inputField">
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.rated" />
-            <label for="Rated">Rated</label>
-          </span>
-          <span class="p-float-label">
-            <VNumber
-              v-model="Movies.metacritic"
-              id="Metacritic"
-              :useGrouping="false"
-              :minFractionDigits="1"
-              :maxFractionDigits="1"
-              :min="0.0"
-              :max="10.0"
-            />
-            <label for="Metacritic">Metacritic</label>
-          </span>
-          <span class="p-float-label">
-            <VInput type="text" v-model="Movies.released" id="Released" />
-            <label for="Released">Released</label>
-          </span>
-          <span class="p-float-label">
-            <VInput
-              type="string"
-              v-model="Movies.lastupdated"
-              id="LastUpdated"
-            />
-            <label for="LastUpdated">LastUpdated</label>
-          </span>
-        </div>
-
         <div class="inputField">
           <VAccordion>
             <VAccordionTab header="Awards">
@@ -657,6 +645,7 @@ export default {
       });
     },
     async createMovie() {
+      this.released = new Date()
       const data = {
         Movies: this.Movies,
         jwt: `Bearer ${this.jwt}`,
@@ -671,6 +660,7 @@ export default {
       this.displayC = false;
     },
     async updateMovie() {
+      this.Movies.released = undefined
       const data = {
         Movies: this.Movies,
         jwt: `Bearer ${this.jwt}`,
@@ -681,6 +671,7 @@ export default {
         limit: 15,
         skip: this.skip,
       };
+      this.lastupdated = new Date()
       await this.$store.dispatch("updateMovies", data);
       await this.$store.dispatch("getMoviesPaginate", data2);
       this.displayU = false;
@@ -708,50 +699,51 @@ export default {
       Movies: {
         awards: {
           nominations: undefined,
-          text: "",
+          text: undefined,
           wins: undefined,
         },
-        countries: [],
-        directors: [],
-        fullplot: "",
-        genres: [],
+        countries: undefined,
+        directors: undefined,
+        cast: undefined,
+        fullplot: undefined,
+        genres: undefined,
         imdb: {
           id: undefined,
           rating: undefined,
           votes: undefined,
         },
-        languages: [],
+        languages: undefined,
         metacritic: undefined,
-        plot: "",
-        poster: "",
-        rated: "",
-        released: "",
+        plot: undefined,
+        poster: undefined,
+        rated: undefined,
+        released: new Date(),
         runtime: undefined,
-        title: "",
+        title: undefined,
         tomatoes: {
-          boxOffice: "",
-          consensus: "",
+          boxOffice: undefined,
+          consensus: undefined,
           critic: {
             meter: undefined,
             numReviwes: undefined,
             rating: undefined,
           },
-          dvd: "",
+          dvd: undefined,
           fresh: undefined,
-          lastUpdated: "",
-          production: "",
+          lastUpdated: undefined,
+          production: undefined,
           rotten: undefined,
           viewer: {
             meter: undefined,
             numReviews: undefined,
             rating: undefined,
           },
-          website: "",
+          website: undefined,
         },
-        type: "",
-        writers: [],
+        type: undefined,
+        writers: undefined,
         year: undefined,
-        lastupdated: "",
+        lastupdated: new Date(),
       },
     };
   },
@@ -760,7 +752,7 @@ export default {
 <style scoped>
 .dialog {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .inputField {
   display: flex;

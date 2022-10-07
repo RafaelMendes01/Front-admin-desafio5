@@ -41,7 +41,7 @@
           </stats-card>
         </div>
 
-        <div class="offset-md-2 col-xl-4 col-md-6">
+        <div class="offset-xl-2 col-xl-4 col-md-6">
           <stats-card>
             <div slot="header" class="icon-success">
               <i class="nc-icon nc-quote text-success"></i>
